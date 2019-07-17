@@ -46,13 +46,10 @@ function handleError(error: AjaxError){
 }
 
 
-export function sendGet(action: IPingAction) :Observable<AjaxResponse>{
+export function sendGet(action: IPingAction): Observable<AjaxResponse>{
     let request: AjaxRequest = {
         url: "https://postman-echo.com/ip",
         method: "GET",
     }
-
     return ajax(request)
-        
-    
 }

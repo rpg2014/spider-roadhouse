@@ -20,3 +20,17 @@ Make it redirect to the s3 bucket of the frontend ... done
 
 ## Changes to front end
 write it
+
+
+#RPC Protocall
+##Java server takes requests formatted like
+{
+    command: "command string",
+    user: "username",
+    authToken: "authtoken"
+}
+##Error message
+http status will reflect error as well.
+{
+    errorMessage: "text"
+}
