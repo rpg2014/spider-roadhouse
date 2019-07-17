@@ -28,7 +28,8 @@ export function pingEpic(action$: ActionsObservable<IPingAction>, store$: StateO
 function handleResponse(ajaxResponse: AjaxResponse) {
     switch (ajaxResponse.status){
         case 200:
-            return pingActionSuccess({text:"ajax success"});
+            console.log(ajaxResponse)
+            return pingActionSuccess({text:ajaxResponse.response.ip});
         default:
             return pingActionFailed({httpStatus: ajaxResponse.status,
                 errorMessage: ajaxResponse.responseText
@@ -47,11 +48,8 @@ function handleError(error: AjaxError){
 
 export function sendGet(action: IPingAction) :Observable<AjaxResponse>{
     let request: AjaxRequest = {
-        url: "https://postman-echo.com/get?foo1=bar1&foo2=bar2",
+        url: "https://postman-echo.com/ip",
         method: "GET",
-        headers: {
-            "Access-Control-Allow-Origin": '*',
-        }
     }
 
     return ajax(request)
