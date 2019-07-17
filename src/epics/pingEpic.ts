@@ -28,7 +28,6 @@ export function pingEpic(action$: ActionsObservable<IPingAction>, store$: StateO
 function handleResponse(ajaxResponse: AjaxResponse) {
     switch (ajaxResponse.status){
         case 200:
-            console.log(ajaxResponse)
             return pingActionSuccess({text:ajaxResponse.response.ip});
         default:
             return pingActionFailed({httpStatus: ajaxResponse.status,
@@ -38,7 +37,6 @@ function handleResponse(ajaxResponse: AjaxResponse) {
 }
 
 function handleError(error: AjaxError){
-    console.log(error)
     return pingActionFailed({
         httpStatus: error.status,
         errorMessage: error.message,

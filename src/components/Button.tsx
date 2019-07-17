@@ -41,7 +41,6 @@ function mapStateToProps(state: IApplicationState) : IPingButtonProps{
     let error: boolean  = false;
     let errorData: string = "";
     if(state.pingState !== undefined){
-        console.log(state.pingState)
         error = state.pingState.isError;  
     }
 

@@ -21,7 +21,6 @@ export function pingReducer(fetchingState = initalFetchingState, action: IPingAc
     
     switch(action.type){
         case PING_ACTION:
-                console.log("Dispatched PING_ACTION"); 
             return{
                 ...fetchingState,
                     data: undefined,
@@ -35,7 +34,6 @@ export function pingReducer(fetchingState = initalFetchingState, action: IPingAc
                     isError: false,
             }
         case PING_ACTION_FAILED:
-                console.log("in failed reducer");
             return {
                 ...fetchingState,
                     isFetching: false,
