@@ -7,7 +7,8 @@ verify JWT from cognito
 just need a singleton? that veryfiys the JWT token on requests.  
 will throw an error if not valid.  
 [token docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-with-identity-providers.html)  
-follow these [steps](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) to verify the token  
+follow these [steps](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) to verify the token  \
+Have a dynamo db table that contains flag if user has permission to start the server.  Might be able to do this though cognito, but easier with just dynamo
 
 
 
@@ -30,7 +31,7 @@ nvm i broke it.  might want to use actual http server instead of tcp.
 ## Changes to front end
 write it
 Use amplify hoc with aws cognito to do login.  
-use Auth.getCurrentSession() to get JWT   
+use authData.getSignInUserSession().getAccessToken() to get JWT   
 [amplify docs](https://aws-amplify.github.io/docs/js/authentication)
 
 
@@ -45,22 +46,29 @@ Feel free to suggest changes, like, idk if we need the username field cause its 
 }
 ```
 command will come from enum {start,stop,reboot,details,status}   
- no auth needed for isUp  
+ no auth needed for status  
 authToken is JWT from aws amplify / cognito
  
  ## Commands + responses
  ### status
  Auth is not needed  
  returns one of these options
- * up
- * down
- * starting
- * stopping
+```typescript
+export enum ServerStatus {
+    Pending = 'pending',
+    Running = 'running',
+    ShuttingDown = 'shutting-down',
+    Terminated = 'terminated',
+    Stopping = 'stopping',
+    Stopped = 'stopped',
+}
+```
 
 
 
 ## Error message
 http status will reflect error as well.
+This blob might not be accurate.  Im currently just grabbing the response text.
 ```json
 {
     errorMessage: "text"
