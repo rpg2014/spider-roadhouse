@@ -1,39 +1,34 @@
 import { IFetchingState } from "../interfaces/IFetchingState";
-import { IPingResponse } from "../interfaces/IPingResponse";
+import { IServerStatus, ServerStatus } from "../interfaces/IServerStatus";
+import { IAction, SERVER_STATUS_ACTION, SERVER_STATUS_ACTION_SUCCESS, SERVER_STATUS_ACTION_FAILED } from "../actions/constants";
 
-import { PING_ACTION, PING_ACTION_SUCCESS, PING_ACTION_FAILED, IAction } from "../actions/constants";
 
-const initalPingResponse: IPingResponse ={
-    text: "",
+
+const initalFetchingState: IFetchingState<IServerStatus> = {
+    data: undefined,
+    isError: false,
+    isFetching: false,
+    errorData: undefined,
 }
 
-const initalFetchingState: IFetchingState<IPingResponse> = {
-    
-        data: initalPingResponse,
-        isFetching: false,
-        isError: false,
-        errorData: undefined,
-    
-  };
-  
 
-export function pingReducer(fetchingState = initalFetchingState, action: IAction<IPingResponse>):IFetchingState<IPingResponse> {
+export function serverStatusReducer(fetchingState = initalFetchingState, action: IAction<IServerStatus>): IFetchingState<IServerStatus> {
     
     switch(action.type){
-        case PING_ACTION:
+        case SERVER_STATUS_ACTION:
             return{
                 ...fetchingState,
                     data: undefined,
                     isFetching: true,
             }
-        case PING_ACTION_SUCCESS:
+        case SERVER_STATUS_ACTION_SUCCESS:
             return {
                 ...fetchingState,
                     data: action.response,
                     isFetching: false,
                     isError: false,
             }
-        case PING_ACTION_FAILED:
+        case SERVER_STATUS_ACTION_FAILED:
             return {
                 ...fetchingState,
                     isFetching: false,

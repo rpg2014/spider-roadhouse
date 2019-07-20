@@ -11,6 +11,8 @@ import { IFetchingState } from '../interfaces/IFetchingState';
 import { IPingResponse } from '../interfaces/IPingResponse';
 import 'redux-devtools-extension'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { IAuthDetails } from '../interfaces/IAuthDetails';
+import { IServerStatus } from '../interfaces/IServerStatus';
 
 
 let initalPingState: IFetchingState<IPingResponse> = {
@@ -18,12 +20,22 @@ let initalPingState: IFetchingState<IPingResponse> = {
     isError: false,
     isFetching: false,
 }
+let initalServerStatus: IFetchingState<IServerStatus> = {
+    data: undefined,
+    isError: false,
+    isFetching: false,
+}
+
+let initalAuthDetailsState: IAuthDetails = {
+    accessToken: undefined
+}
 
 
 
 let initalState: IApplicationStore = {
     pingState: initalPingState,
-
+    authDetails: initalAuthDetailsState,
+    serverStatus: initalServerStatus,
     // serverDetails: {
     //     isServerRunning: false,
     //     serverAddress: "",

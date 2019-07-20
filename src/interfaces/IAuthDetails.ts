@@ -1,5 +1,5 @@
+import { CognitoAccessToken } from "amazon-cognito-identity-js";
 
 export interface IAuthDetails{
-    isAuthenticated: boolean;
-    sessionToken: string;
+    accessToken?: CognitoAccessToken;
 }

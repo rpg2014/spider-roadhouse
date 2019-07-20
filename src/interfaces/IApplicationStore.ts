@@ -1,4 +1,4 @@
-import { IServerState } from './IServerState';
+import { IServerStatus } from './IServerStatus';
 import {IAuthDetails} from './IAuthDetails';
 import { IFetchingState } from './IFetchingState';
 import { IPingResponse } from './IPingResponse';
@@ -6,6 +6,6 @@ import { IPingResponse } from './IPingResponse';
 export default interface IApplicationStore {
     pingState: IFetchingState<IPingResponse>,
 
-    // serverDetails: IServerState;
-    // authDetails: IAuthDetails;
+    serverStatus: IFetchingState<IServerStatus>;
+    authDetails: IAuthDetails;
 }

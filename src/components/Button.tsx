@@ -2,11 +2,14 @@ import React from "react";
 import IApplicationState from '../interfaces/IApplicationStore';
 import { connect } from "react-redux";
 import { pingAction } from "../actions/pingAction";
+import { saveAccessToken } from "../actions/authAction";
+import { CognitoAccessToken } from "amazon-cognito-identity-js";
 
 
 
 interface IPingButtonProps {
-    ping?: () => void,
+    ping: () => void,
+    saveAccesstoken: (accessToken: CognitoAccessToken) => void,
     text: string,
     isError: boolean,
     errorData: string,
@@ -15,7 +18,9 @@ interface IPingButtonProps {
 export class PingButton extends React.Component<IPingButtonProps> {
     constructor(props:IPingButtonProps){
         super(props);
+        
     }
+
 
     render() {
         if(this.props.isError){
@@ -36,22 +41,27 @@ export class PingButton extends React.Component<IPingButtonProps> {
 
 
 
-function mapStateToProps(state: IApplicationState) : IPingButtonProps{
-    let text = "click button";
+function mapStateToProps(state: IApplicationState){
+    let text = "fug"
     let error: boolean  = false;
     let errorData: string = "";
-    if(state.pingState !== undefined){
+    console.log(state.authDetails)
+    if(state.authDetails !== undefined){
+        if (state.authDetails.accessToken) {
+            text = state.authDetails.accessToken.getJwtToken();
+        }
         error = state.pingState.isError;  
     }
-
-    if (state.pingState && state.pingState.data) {
-        text = state.pingState.data.text;
-    }
     
-    if(state.pingState && state.pingState.errorData){
+
+    // if (state.pingState && state.pingState.data) {
+    //     text = state.pingState.data.text;
+    // }
+    
+    // if(state.pingState && state.pingState.errorData){
           
-        errorData = state.pingState.errorData.errorMessage
-    }
+    //     errorData = state.pingState.errorData.errorMessage
+    // }
     return {
         text,
         isError: error,
@@ -62,6 +72,7 @@ function mapStateToProps(state: IApplicationState) : IPingButtonProps{
 function mapDispatchToProps(dispatch: Function) {
     return {
         ping: ()=> dispatch(pingAction()),
+        saveAccesstoken: (accessToken: CognitoAccessToken) => dispatch(saveAccessToken(accessToken))
     }
 }
 
