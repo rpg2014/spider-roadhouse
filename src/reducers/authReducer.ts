@@ -1,6 +1,6 @@
 import { IAuthDetails } from "../interfaces/IAuthDetails";
 import { IAuthAction } from "../actions/authAction";
-import { REMOVE_ACCESS_TOKEN, SAVE_ACCESS_TOKEN } from "../actions/constants";
+import { REMOVE_ACCESS_TOKEN, REGISTER_ACCESS_TOKEN} from "../actions/constants";
 
 
 
@@ -12,7 +12,7 @@ const initalAuthDetailsState: IAuthDetails  = {
 
 export function authReducer(authState = initalAuthDetailsState, action: IAuthAction):IAuthDetails {
     switch(action.type) {
-        case SAVE_ACCESS_TOKEN:
+        case REGISTER_ACCESS_TOKEN:
             return {
                 accessToken: action.accessToken,
             }
@@ -22,7 +22,7 @@ export function authReducer(authState = initalAuthDetailsState, action: IAuthAct
             }
         default:
             return {
-                accessToken: undefined,
+                ...authState
             }
     }
 }

@@ -3,15 +3,15 @@ import logo from './logo.svg';
 import { Route, Switch}from 'react-router'
 import './ServerControlsWithAuth.css';
 import { Provider } from 'react-redux';
-import Button from '../Button';
-import { withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
+import Button from '../StartStopButton';
 import Amplify, { Auth } from 'aws-amplify';
-import { Authenticator, ForgotPassword } from 'aws-amplify-react';
+import { Authenticator, ForgotPassword, Greetings, SignOut } from 'aws-amplify-react';
 
 import createInitialStore, {history} from '../../store/store';
 import { ConnectedRouter } from 'connected-react-router';
-import  ServerControls  from '../ServerControls';
+import  ServerControls  from '../ServerControls/ServerControls';
 import { string } from 'prop-types';
+
 
 
 export const store = createInitialStore();
@@ -67,12 +67,46 @@ Amplify.configure({
 const signUpConfig= {
     hiddenDefaults: ["phone_number"],
 }
+const containerCss = {
+    backgroundColor: '#5c5c5c',
+    color: '#f8f9fa'
+}
+const whiteColor = {
+    color: '#f8f9fa',
+}
+const inputBox = {
+    borderColor: '#f8f9fa',
+    backgroundColor: 'transparent',
+    border: '1px solid #f8f9fa',
+    color: 'f8f9fa'
+}
+const buttonTheme ={
+    borderColor: '#f8f9fa',
+    backgroundColor: 'transparent',
+    border: '1px solid #f8f9fa',
+    color: 'f8f9fa'
+}
+
+
+const theme = {
+    formSection: containerCss,
+    sectionHeader: whiteColor,
+    inputLabel: whiteColor,
+    hint: whiteColor,
+    sectionFooter: whiteColor,
+    input: inputBox,
+    button: buttonTheme,
+    signInButton: buttonTheme,
+}
 
 
 const ServerControlsWithAuth: React.FC = () => {
   return (
-	<div>
-      <Authenticator signUpConfig={signUpConfig}>
+	<div className='h-100 server-controls-bg '>
+      <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ 
+        [
+            Greetings,
+         ]} >
           <ServerControls />
         </Authenticator>
      </div>

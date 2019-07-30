@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router'
 import { authReducer } from './authReducer';
 import { serverStatusReducer } from './serverStatusReducer';
+import { serverDetailsReducer } from './serverDetailsReducer';
 
 
 
@@ -15,4 +16,5 @@ export default (history: any) => combineReducers({
     pingState: pingReducer,
     authDetails: authReducer,
     serverStatus: serverStatusReducer,
+    serverDetails: serverDetailsReducer,
 })

@@ -1,4 +1,4 @@
-import { REMOVE_ACCESS_TOKEN, SAVE_ACCESS_TOKEN } from "./constants";
+import { REMOVE_ACCESS_TOKEN, REGISTER_ACCESS_TOKEN} from "./constants";
 import { CognitoAccessToken } from "amazon-cognito-identity-js";
 
 export interface IAuthAction {
@@ -12,9 +12,9 @@ export function removeAccessToken(): IAuthAction {
     }
 }
 
-export function saveAccessToken(accessToken: CognitoAccessToken): IAuthAction{
+export function registerAccessToken(accessToken: CognitoAccessToken): IAuthAction{
     return{
-        type: SAVE_ACCESS_TOKEN,
+        type: REGISTER_ACCESS_TOKEN,
         accessToken,
     }
 }

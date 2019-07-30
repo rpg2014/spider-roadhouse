@@ -11,14 +11,16 @@ import { WelcomePage } from './components/WelcomePage/WelcomePage';
 
 
 ReactDOM.render(
+    <div className='h-100'>
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <Switch>
-                <Route exact path='/server' component={ServerControlsWithAuth}/>
+                <Route exact path='/server' component={ServerControlsWithAuth} className='h-100 ' />
                 <Route exact path='/' component={WelcomePage}/>
             </Switch>
         </ConnectedRouter>
     </Provider>
+    </div>
 
 , document.getElementById('root'));
 
