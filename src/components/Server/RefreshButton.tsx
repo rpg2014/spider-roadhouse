@@ -22,10 +22,6 @@ export class RefreshButton extends React.Component<IRefreshButtonProps> {
        setInterval(this.props.fetchStatus, 60000);
     }
 
-    componentWillUnmount() {
-        clearInterval();
-    }
-
     handleClick(){
         this.props.fetchStatus();
         

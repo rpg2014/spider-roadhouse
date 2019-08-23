@@ -104,7 +104,7 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
                 case undefined:
                     break;
             }
-        setTimeout(this.props.refreshStatus, 500);
+        setTimeout(this.props.refreshStatus, 1000);
     }
     
 }
