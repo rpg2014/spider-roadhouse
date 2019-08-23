@@ -14,6 +14,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { IAuthDetails } from '../interfaces/IAuthDetails';
 import { IServerStatus } from '../interfaces/IServerStatus';
 import { IServerDetails } from '../interfaces/IServerDetails';
+import { IServerActionStatus } from '../interfaces/IServerActionStatus';
 
 
 let initalPingState: IFetchingState<IPingResponse> = {
@@ -36,13 +37,20 @@ let initalServerDetailsState: IFetchingState<IServerDetails> = {
     isFetching: false,
 }
 
+let initalServerActionStatusState: IFetchingState<IServerActionStatus> = {
+    data: undefined,
+    isError: false,
+    isFetching: false,
+}
+
 
 
 let initalState: IApplicationStore = {
     pingState: initalPingState,
     authDetails: initalAuthDetailsState,
     serverStatus: initalServerStatus,
-    serverDetails: initalServerDetailsState
+    serverDetails: initalServerDetailsState,
+    serverActionStatus: initalServerActionStatusState,
 };
 
 export const history = createBrowserHistory();

@@ -31,6 +31,7 @@ export function serverStatusReducer(fetchingState = initalFetchingState, action:
         case SERVER_STATUS_ACTION_FAILED:
             return {
                 ...fetchingState,
+                    data: undefined,
                     isFetching: false,
                     isError: true,
                     errorData: action.errorData,
