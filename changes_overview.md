@@ -40,9 +40,7 @@ Feel free to suggest changes, like, idk if we need the username field cause its 
 ## Java server takes requests formatted like
 ```json
 {
-    command: "command string",  
     user: "username",
-    authToken: "authtoken" 
 }
 ```
 command will come from enum {start,stop,reboot,details,status}   

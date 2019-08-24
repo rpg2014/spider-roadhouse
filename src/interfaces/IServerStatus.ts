@@ -5,10 +5,10 @@ export interface IServerStatus {
 }
 
 export enum ServerStatus {
-    Pending = 'pending',
-    Running = 'running',
-    ShuttingDown = 'shutting-down',
-    Terminated = 'terminated',
-    Stopping = 'stopping',
-    Stopped = 'stopped',
+    Pending = 'Pending',
+    Running = 'Running',
+    ShuttingDown = 'ShuttingDown',
+    Terminated = 'Terminated',
+    Stopping = 'Stopping',
+    Stopped = 'Stopped',
 }

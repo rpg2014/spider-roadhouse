@@ -1,6 +1,6 @@
 //import { routerMiddleware } from 'react-router-redux';
 //import createBrowserHistory from 'history/createBrowserHistory';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import IApplicationStore from '../interfaces/IApplicationStore';
 import createRootReducer from "../reducers"
 import {createBrowserHistory} from 'history';
@@ -13,6 +13,8 @@ import 'redux-devtools-extension'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { IAuthDetails } from '../interfaces/IAuthDetails';
 import { IServerStatus } from '../interfaces/IServerStatus';
+import { IServerDetails } from '../interfaces/IServerDetails';
+import { IServerActionStatus } from '../interfaces/IServerActionStatus';
 
 
 let initalPingState: IFetchingState<IPingResponse> = {
@@ -29,6 +31,17 @@ let initalServerStatus: IFetchingState<IServerStatus> = {
 let initalAuthDetailsState: IAuthDetails = {
     accessToken: undefined
 }
+let initalServerDetailsState: IFetchingState<IServerDetails> = {
+    data: undefined,
+    isError: false,
+    isFetching: false,
+}
+
+let initalServerActionStatusState: IFetchingState<IServerActionStatus> = {
+    data: undefined,
+    isError: false,
+    isFetching: false,
+}
 
 
 
@@ -36,16 +49,9 @@ let initalState: IApplicationStore = {
     pingState: initalPingState,
     authDetails: initalAuthDetailsState,
     serverStatus: initalServerStatus,
-    // serverDetails: {
-    //     isServerRunning: false,
-    //     serverAddress: "",
-    // },
-    // authDetails: {
-    //     isAuthenticated: false,
-    //     sessionToken: "",
-    // },
+    serverDetails: initalServerDetailsState,
+    serverActionStatus: initalServerActionStatusState,
 };
-//export const history = createBrowserHistory();
 
 export const history = createBrowserHistory();
 
