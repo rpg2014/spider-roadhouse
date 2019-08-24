@@ -1,6 +1,6 @@
 //import { routerMiddleware } from 'react-router-redux';
 //import createBrowserHistory from 'history/createBrowserHistory';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import IApplicationStore from '../interfaces/IApplicationStore';
 import createRootReducer from "../reducers"
 import {createBrowserHistory} from 'history';

@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router';
-import createInitialStore, {history} from './store/store';
+import {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 
 

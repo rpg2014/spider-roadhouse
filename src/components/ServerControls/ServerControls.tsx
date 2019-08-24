@@ -1,7 +1,6 @@
 import React from "react";
 import logo from '../../minecraft-logo-17.png';
-import { ConnectedRouter } from "connected-react-router";
-import { Provider, connect } from "react-redux";
+import { connect } from "react-redux";
 import {SignOut} from 'aws-amplify-react';
 import './ServerControls.css'
 import { registerAccessToken } from "../../actions/authAction";
@@ -18,23 +17,37 @@ export interface IMainProps {
 }
 
 export class ServerControls extends React.Component<IMainProps> {
-	constructor(props: IMainProps, context: any) {
-    super(props, context);
-  }
 
   componentDidUpdate(){
-    if(this.props.authData && this.props.authState && this.props.authData.getSignInUserSession() !== null){
-      let userSession = this.props.authData.getSignInUserSession();
+    if(this.props.authData && this.props.authState){
+      try {
+        if(this.props.authData.getSignInUserSession() !== null){
+          let userSession = this.props.authData.getSignInUserSession();
       
-      if(userSession!==null && this.props.authState === "signedIn") {
-      
-        this.props.saveAccessToken(userSession.getAccessToken());
+          if(userSession!==null && this.props.authState === "signedIn") {
+          
+            this.props.saveAccessToken(userSession.getAccessToken());
+          }
+        }
+        
+      } catch (error) {
+        
       }
     }
   }
 
 	
 	render() {
+    if(this.props.authState === "confirmSignUp"){
+      return(
+      <>
+        <div className=' alert alert-info container mt-5' role='alert'>
+          Check your email for the verification link.
+        </div>
+      </>
+      )
+    }
+
 		if(this.props.authState === "signedIn" && this.props.authData){
       return ( 
         <div className='  h-100'>

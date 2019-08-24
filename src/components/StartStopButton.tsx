@@ -1,9 +1,6 @@
 import React from "react";
 import IApplicationState from '../interfaces/IApplicationStore';
 import { connect } from "react-redux";
-import { pingAction } from "../actions/pingAction";
-import { registerAccessToken } from "../actions/authAction";
-import { CognitoAccessToken } from "amazon-cognito-identity-js";
 import { ServerStatus } from '../interfaces/IServerStatus';
 import { serverStatusAction } from "../actions/serverStatusAction";
 import { IFetchingState } from "../interfaces/IFetchingState";
@@ -23,26 +20,20 @@ interface StartStopButtonProps {
 };
 
 export class StartStopButton extends React.Component<StartStopButtonProps> {
-    constructor(props:StartStopButtonProps){
-        super(props);
-        
-    }
-
-
+    clicked: boolean = false;
+    
     render() {
         if (this.props.serverActionStatus.isFetching) {
             return (
                 <div className="spinner-grow align-middle text-light"></div>
             );
         }
-        if (this.props.statusFetchError){
-            return <></>;
-        }
+        
 
-        if (this.props.serverActionStatus.isError && this.props.serverActionStatus.errorData){
+        if ((this.props.serverActionStatus.isError && this.props.serverActionStatus.errorData) || this.props.statusFetchError){
             return (
                 <div className="alert alert-danger align-middle shadow my-5" role="alert">
-                    {this.props.serverActionStatus.errorData.errorMessage}
+                    {this.props.serverActionStatus.errorData ? this.props.serverActionStatus.errorData.errorMessage : "Error"}
                 </div>
             )
         }
@@ -50,9 +41,7 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
 
         let text: string = "";
         let isDisabled: boolean = false;
-        if (this.props.serverActionStatus.data) {
-            isDisabled = true;
-        }
+        
         switch(this.props.serverStatus) {
             case ServerStatus.Running:
                 text = "Stop Server";
@@ -80,6 +69,11 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
                 isDisabled = true;
                 break;
         }
+
+        if (this.clicked) {
+            isDisabled = true;
+            text = "Waiting..."
+        }
         
         return(
         <button type="button" className="button btn-light btn-block btn-lg shadow my-5 h-50 bg-white rounded align-middle min-height-button" disabled={isDisabled} onClick={this.clickHandler.bind(this)}>
@@ -92,9 +86,11 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
         if(this.props.serverStatus)
             switch(this.props.serverStatus){
                 case ServerStatus.Running:
+                    this.clicked = true;
                     this.props.stopServer();
                     break;
                 case ServerStatus.Terminated:
+                    this.clicked = true;
                     this.props.startServer();
                     break;
                 case ServerStatus.Pending:
@@ -104,7 +100,13 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
                 case undefined:
                     break;
             }
-        setTimeout(this.props.refreshStatus, 1000);
+        setTimeout(this.reset.bind(this), 2500);
+    }
+
+
+    private reset(){
+        this.clicked = false;
+        this.props.refreshStatus();
     }
     
 }
@@ -119,8 +121,12 @@ function mapStateToProps(state: IApplicationState){
         status = state.serverStatus.data.status;
     } else {
         status = undefined;
-        statusFetchError = true;
     }
+
+    if(state.serverStatus.isError && !state.serverStatus.isFetching) {
+        statusFetchError =  true;
+    }
+    
     
 
     return {

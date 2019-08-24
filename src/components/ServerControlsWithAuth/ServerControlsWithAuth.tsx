@@ -1,16 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Route, Switch}from 'react-router'
 import './ServerControlsWithAuth.css';
-import { Provider } from 'react-redux';
-import Button from '../StartStopButton';
-import Amplify, { Auth } from 'aws-amplify';
-import { Authenticator, ForgotPassword, Greetings, SignOut } from 'aws-amplify-react';
-
-import createInitialStore, {history} from '../../store/store';
-import { ConnectedRouter } from 'connected-react-router';
+import Amplify from 'aws-amplify';
+import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
+import createInitialStore from '../../store/store';
 import  ServerControls  from '../ServerControls/ServerControls';
-import { string } from 'prop-types';
+
 
 
 
@@ -106,6 +100,7 @@ const ServerControlsWithAuth: React.FC = () => {
       <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ 
         [
             Greetings,
+            ConfirmSignUp,
          ]} >
           <ServerControls />
         </Authenticator>

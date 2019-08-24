@@ -4,7 +4,7 @@ import { Observable, of } from "rxjs";
 import IApplicationStore from "../interfaces/IApplicationStore";
 import { withLatestFrom, mergeMap, catchError, map } from "rxjs/operators";
 import { IServerDetails } from "../interfaces/IServerDetails";
-import { AjaxResponse, ajax, AjaxError } from "rxjs/ajax";
+import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { serverDetailsActionSuccess, serverDetailsActionFailed } from "../actions/serverDetailsActions";
 import { sendRequest, HTTPMethod } from "./common";
 import { SPIDERMAN_BASE_URL, DETAILS } from "../store/paths";

@@ -1,10 +1,7 @@
 import React from 'react';
-import { ServerStatus } from "../../interfaces/IServerStatus";
 import IApplicationStore from "../../interfaces/IApplicationStore";
-import { serverDetailsAction } from "../../actions/serverDetailsActions";
 import {connect} from 'react-redux';
 import { IServerDetails } from '../../interfaces/IServerDetails';
-import { IServerStatus } from '../../interfaces/IServerStatus';
 import { IFetchingState } from '../../interfaces/IFetchingState';
 
 

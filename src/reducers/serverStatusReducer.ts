@@ -1,5 +1,5 @@
 import { IFetchingState } from "../interfaces/IFetchingState";
-import { IServerStatus, ServerStatus } from "../interfaces/IServerStatus";
+import { IServerStatus } from "../interfaces/IServerStatus";
 import { IAction, SERVER_STATUS_ACTION, SERVER_STATUS_ACTION_SUCCESS, SERVER_STATUS_ACTION_FAILED } from "../actions/constants";
 
 

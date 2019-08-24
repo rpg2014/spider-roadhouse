@@ -16,7 +16,7 @@ export function WelcomePage(): JSX.Element {
           <div className="inner">
             <h3 className="masthead-brand">Parker</h3>
             <nav className="nav nav-masthead justify-content-center">
-              <a className="nav-link active" href="#">Home</a>
+              <Link className="nav-link active" to="/">Home</Link>
               <Link to='/server' className='nav-link'>
                      Server
                 </Link>
@@ -28,7 +28,7 @@ export function WelcomePage(): JSX.Element {
         <h1 className="cover-heading">Welcome</h1>
         <p className="lead">I am a software developer current employed at Amazon.  I have a wide range of experience, from systems programming with rust, to frontend development with typescript and React</p>
         <p className="lead">
-        <a href="#" className="btn btn-lg btn-secondary">Learn more</a>
+        <a href="https://www.linkedin.com/in/parker-given-47279b12b/" className="btn btn-lg btn-secondary">Learn more</a>
         </p>
   </main>
   <footer className="mastfoot mt-auto">

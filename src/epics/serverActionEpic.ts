@@ -2,9 +2,8 @@ import { ActionsObservable, StateObservable, ofType } from "redux-observable";
 import { IAction, SERVER_START_ACTION, SERVER_STOP_ACTION } from "../actions/constants";
 import IApplicationStore from "../interfaces/IApplicationStore";
 import { Observable, of } from "rxjs";
-import { withLatestFrom, merge, mergeMap, catchError, map } from "rxjs/operators";
+import { withLatestFrom, mergeMap, catchError, map } from "rxjs/operators";
 import { AjaxResponse, AjaxError } from "rxjs/ajax";
-import { store } from "../components/ServerControlsWithAuth/ServerControlsWithAuth";
 import { SPIDERMAN_BASE_URL, START, STOP } from "../store/paths";
 import { sendRequest, HTTPMethod } from "./common";
 import { IServerActionStatus } from "../interfaces/IServerActionStatus";
@@ -32,8 +31,10 @@ function handleResponse(ajaxResponse: AjaxResponse, originalAction: IAction<ISer
     switch(ajaxResponse.status) {
         case 200: 
            result = true;
+           break;
         default:
             result = false;
+            break;
     }
    if(originalAction.type === SERVER_START_ACTION){
         return serverStartActionSuccess(

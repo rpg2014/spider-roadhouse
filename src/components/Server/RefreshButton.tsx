@@ -1,6 +1,5 @@
 import React from 'react'
 import { serverStatusAction } from '../../actions/serverStatusAction';
-import { serverDetailsAction } from '../../actions/serverDetailsActions';
 import { connect } from "react-redux";
 import { IServerStatus, ServerStatus } from '../../interfaces/IServerStatus';
 import IApplicationStore from '../../interfaces/IApplicationStore';

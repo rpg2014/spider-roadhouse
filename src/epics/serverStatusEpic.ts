@@ -3,7 +3,7 @@ import { IAction, SERVER_STATUS_ACTION } from "../actions/constants";
 import { IServerStatus } from "../interfaces/IServerStatus";
 import { Observable, of } from "rxjs";
 import { mergeMap, catchError, map, withLatestFrom } from "rxjs/operators";
-import { AjaxResponse, AjaxError, AjaxRequest, ajax } from "rxjs/ajax";
+import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { serverStatusActionSuccess, serverStatusActionFailed } from "../actions/serverStatusAction";
 import { SPIDERMAN_BASE_URL, STATUS } from "../store/paths";
 import IApplicationStore from "../interfaces/IApplicationStore";
