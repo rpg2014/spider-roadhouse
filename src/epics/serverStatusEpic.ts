@@ -2,22 +2,24 @@ import { ActionsObservable, StateObservable, ofType } from "redux-observable";
 import { IAction, SERVER_STATUS_ACTION } from "../actions/constants";
 import { IServerStatus } from "../interfaces/IServerStatus";
 import { Observable, of } from "rxjs";
-import { mergeMap, catchError, map } from "rxjs/operators";
-import { AjaxResponse, AjaxError, AjaxRequest, ajax } from "rxjs/ajax";
+import { mergeMap, catchError, map, withLatestFrom } from "rxjs/operators";
+import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { serverStatusActionSuccess, serverStatusActionFailed } from "../actions/serverStatusAction";
 import { SPIDERMAN_BASE_URL, STATUS } from "../store/paths";
+import IApplicationStore from "../interfaces/IApplicationStore";
+import { sendRequest, HTTPMethod } from "./common";
 
 
-
-export function serverStatusEpic(action$: ActionsObservable<IAction<IServerStatus>>, store$: StateObservable<any>): Observable<IAction<IServerStatus>> {
+export function serverStatusEpic(action$: ActionsObservable<IAction<IServerStatus>>, store$: StateObservable<IApplicationStore>): Observable<IAction<IServerStatus>> {
     return action$.pipe(
         ofType(SERVER_STATUS_ACTION),
-        mergeMap( (_action: IAction<IServerStatus>) =>
-            requestServerStatus().pipe(
+        withLatestFrom(store$),
+        mergeMap( (details: [IAction<IServerStatus>,IApplicationStore]) =>
+            requestServerStatus(details[1]).pipe(
                 map(ajaxResponse => handleResponse(ajaxResponse)),
                 catchError(error => of(handleError(error))),
             ),
-        )
+            )
     )
 }
 
@@ -32,7 +34,7 @@ function handleResponse(ajaxResponse: AjaxResponse):IAction<IServerStatus> {
             );
         default:
             return serverStatusActionFailed({httpStatus: ajaxResponse.status,
-                errorMessage: ajaxResponse.responseText
+                errorMessage: ajaxResponse.response.message
             })
     }
 }
@@ -44,10 +46,11 @@ function handleError(error: AjaxError): IAction<IServerStatus>{
     })
 }
 
-export function requestServerStatus(): Observable<AjaxResponse>{
-    let request: AjaxRequest = {
-        url: SPIDERMAN_BASE_URL + STATUS,
-        method: "GET",
+export function requestServerStatus(store: IApplicationStore): Observable<AjaxResponse>{
+    let authToken:string = "";
+    if(store.authDetails.accessToken){
+        authToken= store.authDetails.accessToken.getJwtToken();
     }
-    return ajax(request)
+
+    return sendRequest(SPIDERMAN_BASE_URL +STATUS, HTTPMethod.GET, authToken);
 }

@@ -1,10 +1,9 @@
-import { IFetchingState } from "../interfaces/IFetchingState";
-import { IServerStatus } from "../interfaces/IServerStatus";
-import { IAction, SERVER_STATUS_ACTION, SERVER_STATUS_ACTION_SUCCESS, SERVER_STATUS_ACTION_FAILED } from "../actions/constants";
+import { IServerDetails } from "../interfaces/IServerDetails";
+import {IFetchingState } from "../interfaces/IFetchingState";
+import { IAction, SERVER_DETAILS_ACTION, SERVER_DETAILS_ACTION_SUCCESS, SERVER_DETAILS_ACTION_FAILED } from "../actions/constants";
 
 
-
-const initalFetchingState: IFetchingState<IServerStatus> = {
+const initalFetchingState: IFetchingState<IServerDetails> = {
     data: undefined,
     isError: false,
     isFetching: false,
@@ -12,26 +11,26 @@ const initalFetchingState: IFetchingState<IServerStatus> = {
 }
 
 
-export function serverStatusReducer(fetchingState = initalFetchingState, action: IAction<IServerStatus>): IFetchingState<IServerStatus> {
+
+export function serverDetailsReducer(fetchingState = initalFetchingState, action: IAction<IServerDetails>): IFetchingState<IServerDetails> {
     
     switch(action.type){
-        case SERVER_STATUS_ACTION:
+        case SERVER_DETAILS_ACTION:
             return{
                 ...fetchingState,
                     data: undefined,
                     isFetching: true,
             }
-        case SERVER_STATUS_ACTION_SUCCESS:
+        case SERVER_DETAILS_ACTION_SUCCESS:
             return {
                 ...fetchingState,
                     data: action.response,
                     isFetching: false,
                     isError: false,
             }
-        case SERVER_STATUS_ACTION_FAILED:
+        case SERVER_DETAILS_ACTION_FAILED:
             return {
                 ...fetchingState,
-                    data: undefined,
                     isFetching: false,
                     isError: true,
                     errorData: action.errorData,

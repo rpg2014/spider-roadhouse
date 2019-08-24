@@ -1,0 +1,18 @@
+
+.Button__button___vS7Mv {
+    border-color: #f8f9fa;
+    background-color: transparent;
+    border: 1px solid #f8f9fa;
+    color: #f8f9fa;
+    border-radius: .25rem;
+}
+
+.start-button {
+    width: 25%;
+}
+@media (max-width: 768px){
+    .start-button {
+        width: 75%;
+    }
+}
+

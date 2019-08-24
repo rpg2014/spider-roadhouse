@@ -1,6 +1,6 @@
 import { AjaxRequest, AjaxResponse, ajax, AjaxError } from 'rxjs/ajax';
 import { ActionsObservable, ofType, StateObservable } from 'redux-observable';
-import {mergeMap, map, switchMap, catchError }from 'rxjs/operators';
+import {mergeMap, map, catchError }from 'rxjs/operators';
 import { PING_ACTION, IAction } from '../actions/constants';
 import { pingActionSuccess, pingActionFailed } from '../actions/pingAction';
 import { Observable, of } from "rxjs";
