@@ -41,7 +41,7 @@ Amplify.configure({
         // OPTIONAL - Cookie path
             path: '/',
         // OPTIONAL - Cookie expiration in days
-            expires: 1, //365,
+            expires: 30, //365,
         // OPTIONAL - Cookie secure flag
         // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
             secure: true
