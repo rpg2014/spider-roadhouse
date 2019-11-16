@@ -53,21 +53,21 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
     render() {
         return (
             
-                <main role="main" className="inner cover mb-auto container ">
+                <main role="main" className="inner cover mt-3 mb-auto container ">
                     <div className='row'>
-                        <p className='lead text-center text-dark'>
-                            This is a web assembly implementation of the game of life.
+                        <p className='lead text-center text-dark m-0'>
+                            This is a web assembly implementation of Conway's Game of Life.
                             Created using the <a href='https://rustwasm.github.io/book/game-of-life/introduction.html'
                                 className='text-muted'>wasm-game-of-life</a> rust tutorial.
                         </p>
                     </div>
                     <div className='row'>
-                        <canvas id='game-of-life-canvas' className="col-sm p-5 justify-content-center"
+                        <canvas id='game-of-life-canvas' className="col-sm mb-5 mx-5 mt-4  justify-content-center"
                             width={this.CANVAS_WIDTH} height={this.CANVAS_HIGHT} ref={this.canvasRef} />
                     </div>
                     <div className='row'>
                         <button onClick={this.handleClick}
-                            className='m-3 col justify-content-center button btn-dark btn-block btn-lg shadow'>Reset</button>
+                            className='m-3 col justify-content-center button btn-dark btn-lg shadow'>Reset</button>
                     </div>
                 </main>
             
