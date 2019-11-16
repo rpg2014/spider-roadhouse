@@ -4,6 +4,7 @@ import Amplify from 'aws-amplify';
 import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
 import createInitialStore from '../../store/store';
 import  ServerControls  from '../ServerControls/ServerControls';
+import { NavBar } from '../NavBar/NavBar';
 
 
 
@@ -96,15 +97,19 @@ const theme = {
 
 const ServerControlsWithAuth: React.FC = () => {
   return (
-	<div className='h-100 server-controls-bg '>
-      <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ 
-        [
-            Greetings,
-            ConfirmSignUp,
-         ]} >
-          <ServerControls />
-        </Authenticator>
-     </div>
+      <div className='server-controls-bg '>
+          <div className='cover-container d-flex h-100 p-3 mx-auto flex-column'>
+              <NavBar />
+              <main role="main" className="inner cover mb-auto">
+                  <div className='h-100'>
+                      <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
+                          ConfirmSignUp, ]}>
+                          <ServerControls />
+                      </Authenticator>
+                  </div>
+              </main>
+          </div>
+      </div>
     )
 }
 

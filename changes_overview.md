@@ -72,3 +72,17 @@ This blob might not be accurate.  Im currently just grabbing the response text.
     errorMessage: "text"
 }
 ```
+
+
+# WebAssembly additions  
+## roadhouse related stuff
+* Will need a new route,
+    * contains a canvas, 
+    * async loads a js script or ts
+        * script does the webassem stuff
+
+
+## build stuff
+* have code build pull rust docker image,
+* build the webassembly and ts definitions
+* use git to commit it to a repository?
