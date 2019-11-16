@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Universe, Cell } from 'roadhouse-wasm'
 import { memory } from 'roadhouse-wasm/wasm_game_of_life_bg'
 import { NavBar } from '../NavBar/NavBar';
@@ -7,57 +7,81 @@ const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
-const universe = Universe.new();
-const width = universe.width();
-const height = universe.height();
 
 
-const CANVAS_HIGHT = (CELL_SIZE + 1) * height + 1;
-const CANVAS_WIDTH = (CELL_SIZE + 1) * width + 1;
+
+
 
 interface IGameOfLifeState {
-    ctx?: any;
+    ctx ? : any;
 }
 interface IGameOfLifeProps {
-    canvasRef?: any,
+    canvasRef ? : any,
 }
-export default class GameOfLife extends React.Component<IGameOfLifeProps, IGameOfLifeState > {
-    canvasRef: React.RefObject<HTMLCanvasElement>;
-    
+export default class GameOfLife extends React.Component < IGameOfLifeProps, IGameOfLifeState > {
+    canvasRef: React.RefObject < HTMLCanvasElement > ;
+    universe: Universe;
+    width: any;
+    height: any;
+    CANVAS_HIGHT: number;
+    CANVAS_WIDTH: number;
+
+
     constructor(props: any) {
         super(props)
         this.canvasRef = React.createRef();
+        this.universe = Universe.new();
+        this.width = this.universe.width();
+        this.height = this.universe.height()
+        this.CANVAS_HIGHT = (CELL_SIZE + 1) * this.height + 1;
+        this.CANVAS_WIDTH = (CELL_SIZE + 1) * this.width + 1;
     }
-    
+
 
     componentDidMount() {
-        
-        if(this.canvasRef.current){
-        this.state = {
-            ctx: this.canvasRef.current.getContext('2d')
-        };
-        this.drawGrid();
-        this.drawCells();
-        requestAnimationFrame(this.renderLoop);
+
+        if (this.canvasRef.current) {
+            this.state = {
+                ctx: this.canvasRef.current.getContext('2d')
+            };
+            this.drawGrid();
+            this.drawCells();
+            requestAnimationFrame(this.renderLoop);
         }
     }
-    
+
 
     render() {
         return (
-            
-        <>
-        <NavBar/>
-            <canvas id='game-of-life-canvas'
-                width={CANVAS_WIDTH}
-                height={CANVAS_HIGHT} 
-                ref={this.canvasRef}/>
-        </>
-    
+            <div className='cover-container d-flex h-100 p-3 mx-auto flex-column'>
+                <NavBar />
+                <main role="main" className="inner cover mb-auto container ">
+                    <div className='row'>
+                        <p className='lead text-center text-dark'>
+                            This is a web assembly implementation of the game of life.
+                            Created using the <a href='https://rustwasm.github.io/book/game-of-life/introduction.html'
+                                className='text-dark'>wasm-game-of-life</a> rust tutorial.
+                        </p>
+                    </div>
+                    <div className='row'>
+                        <canvas id='game-of-life-canvas' className="col-sm p-5 justify-content-center"
+                            width={this.CANVAS_WIDTH} height={this.CANVAS_HIGHT} ref={this.canvasRef} />
+                    </div>
+                    <div className='row'>
+                        <button onClick={this.handleClick}
+                            className='m-3 col justify-content-center button btn-dark btn-block btn-lg shadow'>Reset</button>
+                    </div>
+                </main>
+            </div>
         )
     }
+
+
+    handleClick = () => {
+        this.universe = Universe.new();
+    }
     renderLoop = () => {
-        universe.tick();
+        this.universe.tick();
 
         this.drawGrid();
         this.drawCells();
@@ -70,32 +94,32 @@ export default class GameOfLife extends React.Component<IGameOfLifeProps, IGameO
         this.state.ctx.strokeStyle = GRID_COLOR;
 
         // Vertical lines.
-        for (let i = 0; i <= width; i++) {
+        for (let i = 0; i <= this.width; i++) {
             this.state.ctx.moveTo(i * (CELL_SIZE + 1) + 1, 0);
-            this.state.ctx.lineTo(i * (CELL_SIZE + 1) + 1, (CELL_SIZE + 1) * height + 1);
+            this.state.ctx.lineTo(i * (CELL_SIZE + 1) + 1, (CELL_SIZE + 1) * this.height + 1);
         }
 
         // Horizontal lines.
-        for (let j = 0; j <= height; j++) {
+        for (let j = 0; j <= this.height; j++) {
             this.state.ctx.moveTo(0, j * (CELL_SIZE + 1) + 1);
-            this.state.ctx.lineTo((CELL_SIZE + 1) * width + 1, j * (CELL_SIZE + 1) + 1);
+            this.state.ctx.lineTo((CELL_SIZE + 1) * this.width + 1, j * (CELL_SIZE + 1) + 1);
         }
 
         this.state.ctx.stroke();
     };
 
     getIndex = (row: number, column: number) => {
-        return row * width + column;
+        return row * this.width + column;
     };
 
     drawCells = () => {
-        const cellsPtr = universe.cells();
-        const cells = new Uint8Array(memory.buffer, cellsPtr, width * height);
+        const cellsPtr = this.universe.cells();
+        const cells = new Uint8Array(memory.buffer, cellsPtr, this.width * this.height);
 
         this.state.ctx.beginPath();
 
-        for (let row = 0; row < height; row++) {
-            for (let col = 0; col < width; col++) {
+        for (let row = 0; row < this.height; row++) {
+            for (let col = 0; col < this.width; col++) {
                 const idx = this.getIndex(row, col);
 
                 this.state.ctx.fillStyle = cells[idx] === Cell.Dead ?

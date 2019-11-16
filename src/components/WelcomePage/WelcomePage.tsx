@@ -1,21 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './WelcomePage.css'
 import { NavBar } from '../NavBar/NavBar';
-
-
-
-export interface IWelcomeProps {
-    
-}
 
 export function WelcomePage(): JSX.Element {
     return(<>
         
-        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">
-        <header className="masthead mb-auto">
+        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column ">        
           <NavBar/>
-        </header>
         <main role="main" className="inner cover">
         <h1 className="cover-heading">Welcome</h1>
         <p className="lead">I am a software developer current employed at Amazon.  I have a wide range of experience, from systems programming with rust, to frontend development with typescript and React</p>
