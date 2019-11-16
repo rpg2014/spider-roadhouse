@@ -38,7 +38,7 @@ Amplify.configure({
         // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
         cookieStorage: {
         // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: 'd10bpp6au03ynd.cloudfront.net',
+            domain: 'localhost',//'d10bpp6au03ynd.cloudfront.net',
         // OPTIONAL - Cookie path
             path: '/',
         // OPTIONAL - Cookie expiration in days
@@ -97,11 +97,15 @@ const theme = {
 
 const ServerControlsWithAuth: React.FC = () => {
   return (
-      <div className='server-controls-bg '>
-          <div className='cover-container d-flex h-100 p-3 mx-auto flex-column'>
-              <NavBar />
-              <main role="main" className="inner cover mb-auto">
-                  <div className='h-100'>
+      <div className='server-controls-bg container-fluid'>
+          <div className='h-100 p-3 mx-auto flex-column'>
+              <div className='row justify-content-center'>
+              <div className='cover-container col '>
+                <NavBar />
+              </div>
+              </div>
+              <main role="main" className="inner cover mb-auto row">
+                  <div className='h-100 col'>
                       <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
                           ConfirmSignUp, ]}>
                           <ServerControls />

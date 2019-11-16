@@ -8,9 +8,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router';
 import {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
+import GameOfLifeWithNav from './components/GameOfLifePage/GameOfLifeWithNav';
 
 
-const lazyLoadedGameOfLife = lazy(() => import('./components/GameOfLifePage/GameOfLife'));
+
 
 
 ReactDOM.render(
@@ -21,7 +22,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path='/server' component={ServerControlsWithAuth} className='h-100 ' />
                 <Route exact path='/' component={WelcomePage}/>
-                <Route exact path='/game-of-life' component={lazyLoadedGameOfLife}/>
+                <Route exact path='/game-of-life' component={GameOfLifeWithNav}/>
             </Switch>
             </Suspense>
         </ConnectedRouter>

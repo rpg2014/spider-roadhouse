@@ -1,7 +1,6 @@
 import React from 'react'
 import { Universe, Cell } from 'roadhouse-wasm'
 import { memory } from 'roadhouse-wasm/wasm_game_of_life_bg'
-import { NavBar } from '../NavBar/NavBar';
 
 const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCCCCC";
@@ -53,14 +52,13 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
 
     render() {
         return (
-            <div className='cover-container d-flex h-100 p-3 mx-auto flex-column'>
-                <NavBar />
+            
                 <main role="main" className="inner cover mb-auto container ">
                     <div className='row'>
                         <p className='lead text-center text-dark'>
                             This is a web assembly implementation of the game of life.
                             Created using the <a href='https://rustwasm.github.io/book/game-of-life/introduction.html'
-                                className='text-dark'>wasm-game-of-life</a> rust tutorial.
+                                className='text-muted'>wasm-game-of-life</a> rust tutorial.
                         </p>
                     </div>
                     <div className='row'>
@@ -72,7 +70,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
                             className='m-3 col justify-content-center button btn-dark btn-block btn-lg shadow'>Reset</button>
                     </div>
                 </main>
-            </div>
+            
         )
     }
 
