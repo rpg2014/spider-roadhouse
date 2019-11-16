@@ -1,6 +1,7 @@
 import React from 'react'
 import { Universe, Cell } from 'roadhouse-wasm'
 import { memory } from 'roadhouse-wasm/wasm_game_of_life_bg'
+import './GameOfLife.css'
 
 const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCCCCC";
@@ -24,6 +25,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
     height: any;
     CANVAS_HIGHT: number;
     CANVAS_WIDTH: number;
+    animationFrameId: any;
 
 
     constructor(props: any) {
@@ -45,8 +47,12 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
             };
             this.drawGrid();
             this.drawCells();
-            requestAnimationFrame(this.renderLoop);
+            this.animationFrameId = requestAnimationFrame(this.renderLoop);
         }
+    }
+
+    componentWillUnmount() {
+        cancelAnimationFrame(this.animationFrameId);
     }
 
 
@@ -54,15 +60,16 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
         return (
             
                 <main role="main" className="inner cover mt-3 mb-auto container ">
-                    <div className='row'>
-                        <p className='lead text-center text-dark m-0'>
+                    <div className='row p-1 rounded transparency'>
+                        <p className='lead text-center text-dark m-0 non-transparent'>
                             This is a web assembly implementation of Conway's Game of Life.
                             Created using the <a href='https://rustwasm.github.io/book/game-of-life/introduction.html'
-                                className='text-muted'>wasm-game-of-life</a> rust tutorial.
+                                className='text-muted non-transparent'>wasm-game-of-life</a> rust tutorial.
                         </p>
+                        
                     </div>
                     <div className='row'>
-                        <canvas id='game-of-life-canvas' className="col-sm mb-5 mx-5 mt-4  justify-content-center"
+                        <canvas id='game-of-life-canvas' className="col-sm m-4 justify-content-center"
                             width={this.CANVAS_WIDTH} height={this.CANVAS_HIGHT} ref={this.canvasRef} />
                     </div>
                     <div className='row'>
@@ -84,7 +91,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
         this.drawGrid();
         this.drawCells();
 
-        requestAnimationFrame(this.renderLoop);
+        this.animationFrameId = requestAnimationFrame(this.renderLoop);
     };
 
     drawGrid = () => {

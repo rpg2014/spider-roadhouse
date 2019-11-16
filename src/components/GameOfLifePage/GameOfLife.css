@@ -1,0 +1,11 @@
+@media (max-width: 991.98px) {
+.transparency {
+    background: rgba(52, 58, 64, 1);
+    
+    }
+.non-transparent {
+    color: whitesmoke!important
+}
+}
+
+
