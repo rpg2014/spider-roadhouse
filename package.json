@@ -25,7 +25,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-observable": "^1.1.0",
     "rxjs": "^6.5.2",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "roadhouse-wasm": "rpg2014/roadhouse-wasm"
   },
   "scripts": {
     "start": "react-scripts start",
