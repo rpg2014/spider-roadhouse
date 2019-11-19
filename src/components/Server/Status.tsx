@@ -23,7 +23,7 @@ export function ServerStatus(props: IFetchingState<IServerStatus>) {
     if(props.isError && props.errorData){
         if(props.errorData.errorMessage ==="ajax error"){
             return (
-                <div className='display-4 text-light'>Unable to connect to backend</div>
+                <div className='display-4 text-light'>Offline or backend error</div>
             )
         }
         return (<div className="display-4 text-light">{props.errorData.errorMessage}</div>);
