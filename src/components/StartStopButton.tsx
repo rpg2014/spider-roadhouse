@@ -76,7 +76,7 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
         }
         
         return(
-        <button type="button" className="button btn-light btn-block btn-lg shadow my-5 h-50 p-4 bg-white rounded align-middle min-height-button" disabled={isDisabled} onClick={this.clickHandler.bind(this)}>
+        <button type="button" className="button btn-dark btn-block btn-lg shadow my-5 h-50 p-4 bg-dark rounded align-middle min-height-button" disabled={isDisabled} onClick={this.clickHandler.bind(this)}>
             {text}
         </button>)
     }
