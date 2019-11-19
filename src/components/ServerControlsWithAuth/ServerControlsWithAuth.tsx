@@ -73,7 +73,7 @@ const inputBox = {
     borderColor: '#f8f9fa',
     backgroundColor: 'transparent',
     border: '1px solid #f8f9fa',
-    color: 'f8f9fa'
+    //color: 'f8f9fa'
 }
 const buttonTheme ={
     borderColor: '#f8f9fa',

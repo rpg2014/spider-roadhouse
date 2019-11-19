@@ -9,11 +9,17 @@ export default function GameOfLifeWithNav(){
             <div className = 'mb-4'>
                 <NavBar />
             </div>
-            <Suspense fallback={<div className='inner mb-auto mt-3 text-center'><div className='spinner-border text-light'/></div>}>
+            <Suspense fallback={<LoadingSpinner/>}>
                 <LazyLoadedGameOfLife/>
             </Suspense>
         </div>
     )
 }
 
-
+function LoadingSpinner(): JSX.Element {
+    return (
+        <div className='inner mb-auto mt-3 text-center'>
+            <div className='spinner-border text-light'/>
+        </div>
+    )
+}

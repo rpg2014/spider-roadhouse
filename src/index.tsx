@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ServerControlsWithAuth, { store } from './components/ServerControlsWithAuth/ServerControlsWithAuth';
@@ -9,6 +9,8 @@ import { Switch, Route } from 'react-router';
 import {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import GameOfLifeWithNav from './components/GameOfLifePage/GameOfLifeWithNav';
+import SwitchWithSlide from "./components/Slider/SwitchWithSlide";
+import { NavBar } from './components/NavBar/NavBar';
 
 
 
@@ -18,20 +20,32 @@ ReactDOM.render(
     <div className='h-100'>
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <Suspense fallback={<div>Loading</div>}>
             <Switch>
                 <Route exact path='/server' component={ServerControlsWithAuth} className='h-100 ' />
                 <Route exact path='/' component={WelcomePage}/>
                 <Route exact path='/game-of-life' component={GameOfLifeWithNav}/>
             </Switch>
-            </Suspense>
         </ConnectedRouter>
     </Provider>
     </div>
 
 , document.getElementById('root'));
 
+const onSuccess = () => {
+    console.log("Service Worker Installed successfully");
+}
+
+const onUpdate = () => {
+    console.log("Service Worker updated")
+}
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register({
+    onSuccess,
+    onUpdate
+});
+
+
+

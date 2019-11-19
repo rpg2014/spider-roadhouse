@@ -8,6 +8,8 @@ const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
 
+const WIDTH = 64;
+const HEIGHT = 64;
 
 
 
@@ -31,7 +33,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
     constructor(props: any) {
         super(props)
         this.canvasRef = React.createRef();
-        this.universe = Universe.new();
+        this.universe = Universe.new(WIDTH, HEIGHT);
         this.width = this.universe.width();
         this.height = this.universe.height()
         this.CANVAS_HIGHT = (CELL_SIZE + 1) * this.height + 1;
@@ -83,7 +85,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
 
 
     handleClick = () => {
-        this.universe = Universe.new();
+        this.universe = Universe.new(WIDTH, HEIGHT);
     }
     renderLoop = () => {
         this.universe.tick();
