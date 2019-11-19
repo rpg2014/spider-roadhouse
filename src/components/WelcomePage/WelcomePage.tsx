@@ -9,7 +9,7 @@ export function WelcomePage(): JSX.Element {
           <NavBar/>
         <main role="main" className="inner cover">
         <h1 className="cover-heading">Welcome</h1>
-        <p className="lead">I am a software developer currently employed at Amazon.  I have a wide range of intrests, from systems programming with Rust, to frontend development with Typescript and React</p>
+        <p className="lead">I am a software developer currently employed at Amazon.  I have a wide range of interests, from systems programming with Rust, to frontend development with Typescript and React</p>
         <p className="lead">
         <a href="https://www.linkedin.com/in/parker-given-47279b12b/" className="btn btn-lg btn-secondary">Learn more</a>
         </p>
