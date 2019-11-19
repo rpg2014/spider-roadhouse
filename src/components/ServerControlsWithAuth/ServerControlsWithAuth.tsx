@@ -38,7 +38,7 @@ Amplify.configure({
         // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
         cookieStorage: {
         // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: 'd10bpp6au03ynd.cloudfront.net',
+            domain: 'pwa.parkergiven.com',//'d10bpp6au03ynd.cloudfront.net',
         // OPTIONAL - Cookie path
             path: '/',
         // OPTIONAL - Cookie expiration in days
