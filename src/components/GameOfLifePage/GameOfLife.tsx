@@ -1,6 +1,6 @@
 import React from 'react'
-import { Universe, Cell } from 'wasm-game-of-life'
-import { memory } from 'wasm-game-of-life/wasm_game_of_life_bg'
+import { Universe, Cell } from 'roadhouse-wasm'
+import { memory } from 'roadhouse-wasm/roadhouse_wasm_bg'
 import './GameOfLife.css'
 
 const CELL_SIZE = 5; // px
