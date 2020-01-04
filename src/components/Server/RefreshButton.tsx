@@ -10,15 +10,24 @@ export interface IRefreshButtonProps {
     serverStatus?: IServerStatus;
 }
 
+interface IRefreshState {
+    interval: NodeJS.Timeout;
+}
 
-export class RefreshButton extends React.Component<IRefreshButtonProps> {
 
+export class RefreshButton extends React.Component<IRefreshButtonProps, IRefreshState> {
     constructor(props: IRefreshButtonProps){
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount() {
-       setInterval(this.props.fetchStatus, 60000);
+       this.setState({
+           interval: setInterval(this.props.fetchStatus, 60000),
+       });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
     }
 
     handleClick(){

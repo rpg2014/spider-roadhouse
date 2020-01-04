@@ -576,7 +576,7 @@ module.exports = function (webpackEnv) {
           new RegExp('/[^/]+\\.[^/]+$'),
         ],
         runtimeCaching: [{
-            urlPattern: new RegExp('^https://maxcdn\.bootstrapcdn\.com/'),
+            urlPattern: new RegExp('^https://stackpath\.bootstrapcdn\.com/'),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheableResponse: {
