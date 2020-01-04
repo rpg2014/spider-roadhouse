@@ -3,6 +3,7 @@ import { pingEpic } from "./pingEpic";
 import { serverStatusEpic } from "./serverStatusEpic";
 import { serverDetailsEpic } from "./serverDetailsEpic";
 import { serverActionEpic } from "./serverActionEpic";
+import { fetchJournalEntriesEpic, createJournalEntryEpic } from './JournalEpics'
 
 
 export default combineEpics(
@@ -10,4 +11,6 @@ export default combineEpics(
     serverStatusEpic,
     serverDetailsEpic,
     serverActionEpic,
+    fetchJournalEntriesEpic,
+    createJournalEntryEpic
 );

@@ -1,60 +1,15 @@
 import React from 'react';
 import './ServerControlsWithAuth.css';
-import Amplify from 'aws-amplify';
 import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
-import createInitialStore from '../../store/store';
 import  ServerControls  from '../ServerControls/ServerControls';
-import { NavBar } from '../NavBar/NavBar';
 
 
 
 
-export const store = createInitialStore();
+
 // import Amplify from 'aws-amplify';
 
-Amplify.configure({
-    Auth: {
 
-        // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-        // identityPoolId: 'XX-XXXX-X:XXXXXXXX-XXXX-1234-abcd-1234567890ab',
-        
-        // REQUIRED - Amazon Cognito Region
-        region: 'us-east-1',
-
-        // OPTIONAL - Amazon Cognito Federated Identity Pool Region 
-        // Required only if it's different from Amazon Cognito Region
-        // identityPoolRegion: ' us-east-1',
-
-        // OPTIONAL - Amazon Cognito User Pool ID
-        userPoolId: 'us-east-1_mX9fI3lzt',
-
-        // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: '333d4m712mtbsjpaj5efdj0fh4',
-
-        // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
-        // mandatorySignIn: false,
-
-        // OPTIONAL - Configuration for cookie storage
-        // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-        cookieStorage: {
-        // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: 'pwa.parkergiven.com',//'d10bpp6au03ynd.cloudfront.net',
-        // OPTIONAL - Cookie path
-            path: '/',
-        // OPTIONAL - Cookie expiration in days
-            expires: 30, //365,
-        // OPTIONAL - Cookie secure flag
-        // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: true
-        },
-
-        // OPTIONAL - customized storage object
-        // storage: new MyStorage(),
-        
-        // OPTIONAL - Manually set the authentication flow type. Default is 'USER_SRP_AUTH'
-        // authenticationFlowType: 'USER_PASSWORD_AUTH'
-    }
-});
 
 // You can get the current config object
 // const currentConfig = Auth.configure();
@@ -97,23 +52,15 @@ const theme = {
 
 const ServerControlsWithAuth: React.FC = () => {
   return (
-      <div className='server-controls-bg container-fluid'>
-          <div className='h-100 p-3 mx-auto flex-column'>
-              <div className='row justify-content-center'>
-              <div className='cover-container col '>
-                <NavBar />
-              </div>
-              </div>
-              <main role="main" className="inner cover mb-auto mt-2 row">
-                  <div className='h-100 col'>
-                      <Authenticator className='h-100 ' theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
+      
+              
+              <main role="main" className="inner row cover mb-auto mt-2">       
+                      <Authenticator className='col max_width ' theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
                           ConfirmSignUp, ]}>
                           <ServerControls />
                       </Authenticator>
-                  </div>
               </main>
-          </div>
-      </div>
+
     )
 }
 

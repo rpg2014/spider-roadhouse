@@ -8,11 +8,35 @@
 }
 
 .start-button {
-    width: 25%;
+    width: 35%;
 }
-@media (max-width: 768px){
+
+.w_85 {
+    width: 85%;
+}
+@media (max-height: 600px){
+    
+    .Button__button___vS7Mv {
+        border-color: #f8f9fa;
+        background-color: #343a40;
+        border: 1px solid #f8f9fa;
+        color: #f8f9fa;
+        border-radius: .25rem;
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 768px) {
     .start-button {
         width: 75%;
+    }
+    .Button__button___vS7Mv {
+        border-color: #f8f9fa;
+        background-color: #343a40;
+        border: 1px solid #f8f9fa;
+        color: #f8f9fa;
+        border-radius: .25rem;
+        margin-bottom: 25px;
     }
 }
 

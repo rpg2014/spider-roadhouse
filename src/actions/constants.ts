@@ -23,9 +23,18 @@ export const SERVER_STOP_ACTION = 'STOP_ACTION';
 export const SERVER_STOP_ACTION_SUCCESS = 'STOP_ACTION_SUCCESS';
 export const SERVER_STOP_ACTION_FAILED = 'STOP_ACTION_FAILED';
 
-export interface IAction<Type> {
+export const FETCH_JOURNAL_ENTRIES ='FETCH_JOURNAL_ENTRIES';
+export const FETCH_JOURNAL_ENTRIES_DONE ='FETCH_JOURNAL_ENTRIES_DONE';
+
+export const CREATE_JOURNAL_ENTRY = 'CREATE_JOURNAL_ENTRY';
+export const CREATE_JOURNAL_ENTRY_DONE = 'CREATE_JOURNAL_ENTRY_DONE';
+
+export const TOGGLE_NEW_DIALOG = 'TOGGLE'
+
+export interface IAction<Response, Request = {}> {
     type: string,
     spider_access_token?: string,
     errorData?: IErrorDetail,
-    response?: Type,
+    response?: Response,
+    request?: Request
 }

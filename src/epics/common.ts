@@ -11,14 +11,16 @@ export enum HTTPMethod {
 
 }
 
-export function sendRequest(url: string, method: HTTPMethod, authToken: string): Observable<AjaxResponse> {
+export function sendRequest(url: string, method: HTTPMethod, authToken: string, body?: any): Observable<AjaxResponse> {
 
     let request: AjaxRequest = {
         url,
         method,
         headers: {
-            'spider-access-token': authToken
-        }
+            'spider-access-token': authToken,
+            'Content-Type': 'application/json'
+        },
+        body,
     }
     return ajax(request)
 }

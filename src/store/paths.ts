@@ -3,3 +3,6 @@ export const STATUS = "/server/status";
 export const DETAILS = "/server/details";
 export const START = "/server/start";
 export const STOP = "/server/stop";
+
+export const JOURNAL = '/journal';
+export const NEW = '/new';
