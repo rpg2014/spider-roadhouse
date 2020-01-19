@@ -7,6 +7,10 @@ export interface fetchEntriesResponse {
     errorData?: IErrorDetail
 }
 
+export interface deleteEntryResponse {
+    
+}
+
 export function fetchEntriesAction(): IAction<fetchEntriesResponse> {
     return {
         type: FETCH_JOURNAL_ENTRIES,

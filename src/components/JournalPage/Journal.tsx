@@ -61,7 +61,7 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
     }
     return (
         <>
-            <div className='row d-flex max_width center mx-auto py-3 '>
+            <div className='row d-flex max_width center mx-auto pt-3 '>
                 <div className='col-10 '>
                     <p className=' lead text-dark text-left align-middle  rounded'>
                         Here are all of your journal entries sorted by date    
