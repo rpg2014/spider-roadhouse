@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import IApplicationStore from "../../interfaces/IApplicationStore";
 import { ErrorAlert } from './Error'
 import { toggleNewDialog } from "../../actions/journalActions";
+import { DeleteButton } from "./DeleteButton";
 
 
 
@@ -15,9 +16,13 @@ export const JournalList = () => {
         dispatch(toggleNewDialog())
     }
 
+    const getSpinner =() => {
+        return (entriesState.isFetching ?<LoadingSpinner/> : null)
+    }
+
     if(entriesState.isFetching && !entriesState.data){
         return (
-            <LoadingSpinner/>
+            <LoadingSpinner />
         )
     }
     if(entriesState.isError && entriesState.errorData){
@@ -37,6 +42,7 @@ export const JournalList = () => {
     
     return (
         <div className='row center max_width mx-auto'>
+            {getSpinner()}
             <div className='container-fluid rounded'>
                 {list}
             </div>
@@ -63,9 +69,7 @@ const JournalEntry = (props: JournalEntryProps) => {
                 <button className='btn-sm btn-dark btn-outline-light float-right small-font mx-2'>
                          Edit
                      </button>
-                <button className='btn-sm btn-dark btn-outline-light float-right small-font'>
-                    Delete
-                </button>
+                <DeleteButton id={props.id}/>
                 </div>
             
             <div className="card-body py-2 px-3">

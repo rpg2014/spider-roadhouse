@@ -22,5 +22,5 @@ export default (history: any) => combineReducers({
     serverActionStatus: serverActionStatusReducer,
     journalEntries: fetchJournalEntriesReducer,
     createEntryState: createEntryReducer,
-    isNewJournalDialogOpen: toggleNewDialogReducer
+    isNewJournalDialogOpen: toggleNewDialogReducer,
 })

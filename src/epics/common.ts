@@ -7,7 +7,8 @@ export const ACCESS_TOKEN_HEADER = 'spider-access-token';
 
 export enum HTTPMethod {
     GET = "GET",
-    POST = "POST"
+    POST = "POST",
+    DELETE = "DELETE",
 
 }
 

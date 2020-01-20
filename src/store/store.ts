@@ -49,11 +49,6 @@ export let initalJournalEntrys: IFetchingState<JournalEntryProps[]> = {
     isError: false,
     isFetching: false,
 }
-
-let initalCreateEntry: IFetchingState<Partial<JournalEntryProps>> = {
-    isError: false,
-    isFetching: false
-}
 export let initalDeleteEntry: IFetchingState<boolean> = {
     isError: false,
     isFetching: false,
@@ -70,8 +65,6 @@ let initalState: IApplicationStore = {
     journalEntries: initalJournalEntrys,
     createEntryState: initalDeleteEntry,
     isNewJournalDialogOpen: startOpen,
-    // updateEntryState: initalCreateEntry,
-    // deleteEntryState: initalDeleteEntry
 };
 
 export const history = createBrowserHistory();

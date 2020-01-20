@@ -12,5 +12,5 @@ export default combineEpics(
     serverDetailsEpic,
     serverActionEpic,
     fetchJournalEntriesEpic,
-    createJournalEntryEpic
+    createJournalEntryEpic,
 );

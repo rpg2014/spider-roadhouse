@@ -29,6 +29,8 @@ export const FETCH_JOURNAL_ENTRIES_DONE ='FETCH_JOURNAL_ENTRIES_DONE';
 export const CREATE_JOURNAL_ENTRY = 'CREATE_JOURNAL_ENTRY';
 export const CREATE_JOURNAL_ENTRY_DONE = 'CREATE_JOURNAL_ENTRY_DONE';
 
+export const DELETE_ENTRY = 'DELETE_ENTRY';
+
 export const TOGGLE_NEW_DIALOG = 'TOGGLE'
 
 export interface IAction<Response, Request = {}> {
