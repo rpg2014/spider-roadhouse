@@ -25,7 +25,7 @@ export const NewEntry: React.FC = () => {
             title,
             dateTime: new Date().toISOString(),
         }))
-        dispatch(toggleNewDialog())
+        setTimeout(() => dispatch(toggleNewDialog()), 250)
     }
 
     return (

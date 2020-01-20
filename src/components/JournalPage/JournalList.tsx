@@ -59,7 +59,6 @@ export interface JournalEntryProps {
 }
 
 const JournalEntry = (props: JournalEntryProps) => {
-    console.log(props.dateTime)
     let date = new Date(props.dateTime+"Z");
     
     return (
