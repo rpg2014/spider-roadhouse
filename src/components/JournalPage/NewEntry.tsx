@@ -20,12 +20,14 @@ export const NewEntry: React.FC = () => {
     }
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        dispatch(createEntryAction({
-            text: text? text : undefined,
-            title,
-            dateTime: new Date().toISOString(),
-        }))
-        setTimeout(() => dispatch(toggleNewDialog()), 250)
+        if(!submitState.isFetching) {
+            dispatch(createEntryAction({
+                text: text? text : undefined,
+                title,
+                dateTime: new Date().toISOString(),
+            }))
+            setTimeout(() => dispatch(toggleNewDialog()), 250)
+        }
     }
 
     return (
@@ -40,8 +42,8 @@ export const NewEntry: React.FC = () => {
                                 <input readOnly className="form-control-plaintext text-white bg-dark border-dark rounded" id="dateTime" value={new Date().toLocaleDateString()} / >
                             </div>
                             <div className='col-6'>
-                                {submitState.isFetching? <LoadingSpinner/> : <button className='btn btn-dark btn-outline-light float-right small-font' onClick={handleSubmit}>
-                                     Submit
+                                 <button className='btn btn-dark btn-outline-light float-right small-font' onClick={handleSubmit}>
+                                    {submitState.isFetching? <LoadingSpinner/> :"Submit"}
                                  </button>}
                             </div>
                         </div>

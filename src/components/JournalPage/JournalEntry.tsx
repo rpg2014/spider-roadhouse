@@ -77,7 +77,7 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
         isMarkdown
     }
 
-    const options = {
+    const options: RequestInit = {
         headers,
         method: HTTPMethod.POST,
         body: JSON.stringify(formData)
@@ -99,7 +99,6 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
         run()
     }
     if(isFulfilled && data && data.success) {
-        initalState.toggleEntryMode();
         dispatch(deleteEntryAction({
             id: initalState.id
         }));
@@ -110,12 +109,15 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
         //     id: initalState.id,
         //     ...formData
         // }))
+
+        setTimeout(() => dispatch(initalState.toggleEntryMode()), 250)
     }
     
     
     const getSubmitButton = () => {
         if(error && !hideError) {
-            console.log(error)
+            console.log(error.stack)
+            console.log(error.message)
             setTimeout(()=> {
                 setHideError(true);
             },2000)

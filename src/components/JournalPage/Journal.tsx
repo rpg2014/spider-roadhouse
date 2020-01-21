@@ -67,7 +67,7 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
                         Here are all of your journal entries sorted by date    
                         <br/>
                         <span className='smallest-font'>
-                            The notes are encrypted before they are saved on the server.  The Edit button doesn't work yet. 
+                            The notes are encrypted before they are saved on the server.
                         </span>
                     </p>
                 </div>
