@@ -1,4 +1,3 @@
-import { JournalEntryProps } from "../components/JournalPage/JournalList";
 import { IAction, FETCH_JOURNAL_ENTRIES, CREATE_JOURNAL_ENTRY } from "../actions/constants";
 import { ActionsObservable, StateObservable, ofType } from "redux-observable";
 import { Observable, of } from "rxjs";
@@ -8,6 +7,7 @@ import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { sendRequest, HTTPMethod } from "./common";
 import { SPIDERMAN_BASE_URL, JOURNAL, NEW } from "../store/paths";
 import { fetchEntriesFinished, createEntryFinished } from "../actions/journalActions";
+import { JournalEntryProps } from "../components/JournalPage/JournalEntry";
 
 
 

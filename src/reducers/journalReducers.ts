@@ -1,7 +1,7 @@
 import { IAction, FETCH_JOURNAL_ENTRIES, FETCH_JOURNAL_ENTRIES_DONE, CREATE_JOURNAL_ENTRY, CREATE_JOURNAL_ENTRY_DONE, TOGGLE_NEW_DIALOG, DELETE_ENTRY } from "../actions/constants";
 import { IFetchingState } from "../interfaces/IFetchingState";
-import { JournalEntryProps } from "../components/JournalPage/JournalList";
 import { initalJournalEntrys, initalDeleteEntry, startOpen } from "../store/store";
+import { JournalEntryProps } from "../components/JournalPage/JournalEntry";
 
 
 

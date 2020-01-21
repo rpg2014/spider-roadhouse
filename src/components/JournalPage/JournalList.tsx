@@ -6,6 +6,7 @@ import IApplicationStore from "../../interfaces/IApplicationStore";
 import { ErrorAlert } from './Error'
 import { toggleNewDialog } from "../../actions/journalActions";
 import { DeleteButton } from "./DeleteButton";
+import { JournalEntry } from "./JournalEntry";
 
 
 
@@ -50,36 +51,3 @@ export const JournalList = () => {
 }
 
 
-export interface JournalEntryProps {
-    dateTime: string;
-    id: string;
-    text: string;
-    title?: string;
-    isMarkdown: boolean;
-}
-
-const JournalEntry = (props: JournalEntryProps) => {
-    let date = new Date(props.dateTime+"Z");
-    
-    return (
-        <div className="card text-white bg-dark mb-3 mx-3">
-            <div className="card-header text-left align-middle py-2 px-3">
-                Date: {date.toLocaleString()}
-                <button className='btn-sm btn-dark btn-outline-light float-right small-font mx-2'>
-                         Edit
-                     </button>
-                <DeleteButton id={props.id}/>
-                </div>
-            
-            <div className="card-body py-2 px-3">
-                {props.title ?  getTitle(props.title): null}
-                
-                <p className="card-text text-left ">{props.text}</p>
-            </div>
-        </div>
-    )
-}
-
-const getTitle = (title: string) => {
-    return(<h5 className="card-title text-left border-bottom border-secondary">{title}</h5>)
-}

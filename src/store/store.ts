@@ -15,7 +15,8 @@ import { IAuthDetails } from '../interfaces/IAuthDetails';
 import { IServerStatus } from '../interfaces/IServerStatus';
 import { IServerDetails } from '../interfaces/IServerDetails';
 import { IServerActionStatus } from '../interfaces/IServerActionStatus';
-import { JournalEntryProps } from '../components/JournalPage/JournalList';
+import { JournalEntryProps } from '../components/JournalPage/JournalEntry';
+
 
 
 let initalPingState: IFetchingState<IPingResponse> = {

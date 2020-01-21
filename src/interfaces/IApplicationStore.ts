@@ -4,7 +4,8 @@ import { IFetchingState } from './IFetchingState';
 import { IPingResponse } from './IPingResponse';
 import { IServerDetails }from './IServerDetails';
 import { IServerActionStatus } from './IServerActionStatus';
-import { JournalEntryProps } from '../components/JournalPage/JournalList';
+import { JournalEntryProps } from '../components/JournalPage/JournalEntry';
+
 
 export default interface IApplicationStore {
     pingState: IFetchingState<IPingResponse>,

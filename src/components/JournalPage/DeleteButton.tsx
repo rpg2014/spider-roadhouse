@@ -50,7 +50,6 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
             setHideError(false);
         }
         run()
-        
     }
 
     const toggleAreYouSure = () => {

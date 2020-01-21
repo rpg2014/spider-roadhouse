@@ -6,3 +6,4 @@ export const STOP = "/server/stop";
 
 export const JOURNAL = '/journal';
 export const NEW = '/new';
+

@@ -1,6 +1,6 @@
 import { IAction, FETCH_JOURNAL_ENTRIES, FETCH_JOURNAL_ENTRIES_DONE, CREATE_JOURNAL_ENTRY, CREATE_JOURNAL_ENTRY_DONE, TOGGLE_NEW_DIALOG, DELETE_ENTRY } from "./constants"
-import { JournalEntryProps } from "../components/JournalPage/JournalList"
 import { IErrorDetail } from "../interfaces/IErrorDetail"
+import { JournalEntryProps } from "../components/JournalPage/JournalEntry"
 
 export interface fetchEntriesResponse {
     response?: JournalEntryProps[]
