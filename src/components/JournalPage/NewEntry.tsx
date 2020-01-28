@@ -39,12 +39,12 @@ export const NewEntry: React.FC = () => {
                         <div className='form-row'>
                             <div className='col-6 mx-auto'>
                             
-                                <input readOnly className="form-control-plaintext text-white bg-dark border-dark rounded" id="dateTime" value={new Date().toLocaleDateString()} / >
+                                <input readOnly className="form-control-plaintext text-white bg-dark border-dark rounded" id="dateTime" value={new Date().toLocaleTimeString()} / >
                             </div>
                             <div className='col-6'>
                                  <button className='btn btn-dark btn-outline-light float-right small-font' onClick={handleSubmit}>
                                     {submitState.isFetching? <LoadingSpinner/> :"Submit"}
-                                 </button>}
+                                 </button>
                             </div>
                         </div>
                     </div>

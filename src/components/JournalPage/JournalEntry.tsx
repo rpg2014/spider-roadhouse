@@ -7,7 +7,7 @@ import { HTTPMethod } from '../../epics/common';
 import { useSelector, useDispatch } from 'react-redux';
 import IApplicationStore from '../../interfaces/IApplicationStore';
 import { Alert, Spinner } from 'react-bootstrap';
-import { deleteEntryAction, createEntryAction, fetchEntriesAction } from '../../actions/journalActions';
+import {  createEntryAction, fetchEntriesAction, deleteEntryAction } from '../../actions/journalActions';
 
 export interface JournalEntryProps {
     dateTime: string;
@@ -24,13 +24,17 @@ interface JournalEntryState {
 export const JournalEntry = (props: JournalEntryProps) => {
     const [editMode, setEditMode] = useState(false);
     let date = new Date(props.dateTime+"Z");
+    let displayDate = date.toLocaleString();
+    if (date.getDate() === new Date().getDate()) {
+        displayDate = date.toLocaleTimeString();
+    }
     if(editMode) {
         return <EditEntry {...props} date={date} toggleEntryMode={() => setEditMode(!editMode)} />;
     }
     return (
         <div className="card text-white bg-dark mb-3 mx-3">
             <div className="card-header text-left align-middle py-2 px-3">
-                Date: {date.toLocaleString()}
+                Date: {displayDate}
                 <button className='btn-sm btn-dark btn-outline-light float-right small-font mx-2' onClick={() => setEditMode(!editMode)}>
                          Edit
                      </button>
@@ -65,11 +69,11 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
     const [dateTime, setDateTime] = useState(initalState.date)
     const [isMarkdown, setMarkdown] = useState(initalState.isMarkdown)
 
-    const headers = {
-        'spider-access-token': authToken ,
-        'Content-Type': 'application/json',
-        'Accept' : 'application/json'
-    }
+    const headers = [
+        ['spider-access-token', authToken] ,
+        ['Content-Type', 'application/json'],
+        ['Accept' , 'application/json']
+    ]
     let formData: Partial<JournalEntryProps> = {
         title,
         text,
@@ -93,11 +97,13 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
     }
 
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
         if(hideError) {
             setHideError(false);
         }
         run()
     }
+    // deletes the entry from the local state
     if(isFulfilled && data && data.success) {
         dispatch(deleteEntryAction({
             id: initalState.id
