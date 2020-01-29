@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import IApplicationStore from "../../interfaces/IApplicationStore";
 import { ErrorAlert } from './Error'
 import { toggleNewDialog } from "../../actions/journalActions";
-import { DeleteButton } from "./DeleteButton";
 import { JournalEntry } from "./JournalEntry";
 
 

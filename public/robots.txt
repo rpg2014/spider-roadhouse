@@ -1,0 +1,2 @@
+disallow: /server
+disallow: /journal

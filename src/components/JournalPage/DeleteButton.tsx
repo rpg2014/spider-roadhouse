@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import IApplicationStore from '../../interfaces/IApplicationStore'
-import { LoadingSpinner } from '../GameOfLifePage/GameOfLifeWithNav';
 import { IErrorDetail } from '../../interfaces/IErrorDetail';
 import { useFetch } from "react-async"
 import { SPIDERMAN_BASE_URL, JOURNAL } from '../../store/paths';

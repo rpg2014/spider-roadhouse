@@ -1,13 +1,12 @@
 import React, { ChangeEvent, useState } from 'react'
 import { DeleteButton } from "./DeleteButton";
-import { LoadingSpinner } from '../GameOfLifePage/GameOfLifeWithNav';
 import { useFetch } from 'react-async';
 import { SPIDERMAN_BASE_URL, JOURNAL } from '../../store/paths';
 import { HTTPMethod } from '../../epics/common';
 import { useSelector, useDispatch } from 'react-redux';
 import IApplicationStore from '../../interfaces/IApplicationStore';
 import { Alert, Spinner } from 'react-bootstrap';
-import {  createEntryAction, fetchEntriesAction, deleteEntryAction } from '../../actions/journalActions';
+import {  fetchEntriesAction, deleteEntryAction } from '../../actions/journalActions';
 
 export interface JournalEntryProps {
     dateTime: string;

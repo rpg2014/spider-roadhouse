@@ -15,8 +15,8 @@ export default interface IApplicationStore {
     serverDetails: IFetchingState<IServerDetails>;
     serverActionStatus: IFetchingState<IServerActionStatus>;
     journalEntries: IFetchingState<JournalEntryProps[]>;
-    createEntryState: IFetchingState<boolean>,
-    isNewJournalDialogOpen: boolean,
+    createEntryState: IFetchingState<boolean>;
+    isNewJournalDialogOpen: boolean;
     // updateEntryState: IFetchingState<boolean>,
     // deleteEntryState: IFetchingState<boolean> 
 }
