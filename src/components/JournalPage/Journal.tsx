@@ -2,13 +2,13 @@ import * as React from 'react';
 import {JournalList} from './JournalList'
 import { SignOut } from 'aws-amplify-react';
 import { ConfirmEmail } from '../Auth/ConfirmEmail';
-import { CognitoUser } from "amazon-cognito-identity-js";
+import { CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
 import { useDispatch, useSelector } from 'react-redux';
-import { extractAuthToken } from '../Auth/common';
+import { useAuthData } from '../Auth/common';
 import IApplicationStore from '../../interfaces/IApplicationStore';
-import { registerAccessToken } from '../../actions/authAction';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
+
 
 
 interface JournalProps {
@@ -19,22 +19,19 @@ interface JournalProps {
 export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
     const isNewEntryDialogOpen = useSelector((state:IApplicationStore)=> state.isNewJournalDialogOpen);
     const dispatch = useDispatch();
+    
     const authToken = useSelector( (state:IApplicationStore) => state.authDetails.accessToken ? state.authDetails.accessToken.getJwtToken(): undefined);
-    const submitNewEntryData = useSelector((state : IApplicationStore) => state.createEntryState.data);
-    React.useEffect(() => {
-        if(!authToken){
-        if(props.authData && props.authState ){
-            let token = extractAuthToken(props.authData, props.authState)
-            if (token && token.getJwtToken() !== authToken) {
-                dispatch(registerAccessToken(token))
-            }
+    const submitNewEntrySuccess = useSelector((state : IApplicationStore) => state.createEntryState.data);
+    
+    const fetchEntriesErrorState = useSelector((state: IApplicationStore) => {
+        return {
+            errorData: state.journalEntries.errorData,
+            isError: state.journalEntries.isError
         }
-    }
-    },[props.authState, props.authData, authToken, dispatch])
+    });
+    useAuthData(props.authData)
 
-
-
-    // Fetch journal entries on load.  
+    // Fetch journal entries on load. (after we get an authToken or whenever it changes)
     React.useEffect(() => {
         if(authToken){
             dispatch(fetchEntriesAction());
@@ -42,10 +39,10 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
     },[authToken])
 
     React.useEffect(()=> {
-    if(submitNewEntryData === true) {
+    if(submitNewEntrySuccess === true) {
         dispatch(fetchEntriesAction())
     }
-    },[submitNewEntryData])
+    },[submitNewEntrySuccess])
 
     const toggleNew = () => {
         dispatch(toggleNewDialog())

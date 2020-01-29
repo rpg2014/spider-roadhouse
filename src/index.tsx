@@ -13,6 +13,8 @@ import { JournalPageWithAuth } from './components/JournalPage/JournalPageWithAut
 import { NavBar } from './components/NavBar/NavBar';
 import Amplify from 'aws-amplify';
 
+import 'bootstrap' // import bootstrap js
+
 
 
 export const store = createInitialStore();
@@ -20,19 +22,15 @@ export const store = createInitialStore();
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-        
-          <div className=' h-100 p-3 mx-auto flex-column d-flex container-fluid text-center overflow-rules'>
+            <div className=' h-100 p-3 mx-auto flex-column d-flex container-fluid text-center overflow-rules'>
                 <NavBar />
-             
-            <Switch>
-            
-                <Route exact path='/server' component={ServerControlsWithAuth} />
-                <Route exact path='/' component={WelcomePage}/>
-                <Route exact path='/game-of-life' component={GameOfLifeWithNav}/>
-                <Route path='/journal' component={JournalPageWithAuth}/>
-            </Switch>
+                <Switch>
+                    <Route exact path='/' component={WelcomePage} />
+                    <Route exact path='/server' component={ServerControlsWithAuth} />
+                    <Route exact path='/game-of-life' component={GameOfLifeWithNav} />
+                    <Route path='/journal' component={JournalPageWithAuth} />
+                </Switch>
             </div>
-           
         </ConnectedRouter>
     </Provider>
 
