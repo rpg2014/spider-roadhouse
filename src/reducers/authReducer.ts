@@ -1,6 +1,6 @@
 import { IAuthDetails } from "../interfaces/IAuthDetails";
 import { IAuthAction } from "../actions/authAction";
-import { SET_REFRESH_TIMEOUT_ID, REMOVE_REFRESH_TIMEOUT_ID, REGISTER_AUTH_DATA} from "../actions/constants";
+import { SET_REFRESH_TIMEOUT_ID, REMOVE_REFRESH_TIMEOUT_ID, REGISTER_AUTH_DATA, SET_ACCESS_TOKEN} from "../actions/constants";
 import { CognitoAccessToken, CognitoRefreshToken} from "amazon-cognito-identity-js";
 
 
@@ -14,7 +14,7 @@ const initalAuthDetailsState: IAuthDetails  = {
 
 
 
-export function authReducer(authState = initalAuthDetailsState, action: IAuthAction):IAuthDetails {
+export function authReducer(authState = initalAuthDetailsState, action: IAuthAction): IAuthDetails {
     switch(action.type) {
         case REGISTER_AUTH_DATA:
             if(action.authData){
@@ -34,7 +34,15 @@ export function authReducer(authState = initalAuthDetailsState, action: IAuthAct
             }
             console.log("[ERROR] No AuthData in " + REGISTER_AUTH_DATA + " action");
             break;
-            
+        case SET_ACCESS_TOKEN:
+            if(action.accessToken) {
+                return{
+                    ...authState,
+                    accessToken: action.accessToken
+                }
+            }
+            console.log("[ERROR] No access token in "+ SET_ACCESS_TOKEN +" action");
+            break;
         case SET_REFRESH_TIMEOUT_ID:
             if(action.refreshTimerId){
                 return {

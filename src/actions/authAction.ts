@@ -1,9 +1,10 @@
-import { SET_REFRESH_TIMEOUT_ID, REMOVE_REFRESH_TIMEOUT_ID, REGISTER_AUTH_DATA} from "./constants";
-import { CognitoUser} from "amazon-cognito-identity-js";
+import { SET_REFRESH_TIMEOUT_ID, REMOVE_REFRESH_TIMEOUT_ID, REGISTER_AUTH_DATA, SET_ACCESS_TOKEN} from "./constants";
+import { CognitoUser, CognitoAccessToken} from "amazon-cognito-identity-js";
 
 export interface IAuthAction {
     type: string,
     authData?: CognitoUser,
+    accessToken?: CognitoAccessToken;
     refreshTimerId?: NodeJS.Timeout;
 }
 export interface IRefreshTimerAction {
@@ -15,6 +16,13 @@ export function registerAuthData(authData: CognitoUser): IAuthAction{
     return{
         type: REGISTER_AUTH_DATA,
         authData,
+    }
+}
+
+export function setAccessToken(accessToken: CognitoAccessToken){
+    return {
+        type: SET_ACCESS_TOKEN,
+        accessToken
     }
 }
 

@@ -2,7 +2,7 @@ import { CognitoUser } from "amazon-cognito-identity-js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import IApplicationStore from "../../interfaces/IApplicationStore";
-import { registerAuthData, removeRefreshTimoutId, setRefreshTimoutId } from "../../actions/authAction";
+import { registerAuthData, removeRefreshTimoutId, setRefreshTimoutId, setAccessToken } from "../../actions/authAction";
 import { Auth } from "aws-amplify";
 
 export const extractAuthToken = (authData: CognitoUser, authState: string) => {
@@ -37,7 +37,12 @@ export const useAuthData = (authData?: CognitoUser) => {
       if (!isRefreshIdSet) {
         id = setTimeout(() => {
           console.log('Refreshing Session')
-          Auth.currentSession().then(data => console.log(data))
+          Auth.currentSession().then(data => {
+            console.log(data)
+            if(data.isValid()){
+              dispatch(setAccessToken(data.getAccessToken()))
+            }
+          })
           dispatch(removeRefreshTimoutId());
         }, 3600000); // 1 hour
         // set Id in store
