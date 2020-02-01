@@ -1,12 +1,12 @@
 import React from "react";
-import IApplicationState from '../interfaces/IApplicationStore';
+import IApplicationState from '../../interfaces/IApplicationStore';
 import { connect } from "react-redux";
-import { ServerStatus } from '../interfaces/IServerStatus';
-import { serverStatusAction } from "../actions/serverStatusAction";
-import { IFetchingState } from "../interfaces/IFetchingState";
-import { IServerActionStatus } from "../interfaces/IServerActionStatus";
-import { serverStartAction } from "../actions/serverStartAction";
-import { serverStopAction } from "../actions/serverStopAction";
+import { ServerStatus } from '../../interfaces/IServerStatus';
+import { serverStatusAction } from "../../actions/serverStatusAction";
+import { IFetchingState } from "../../interfaces/IFetchingState";
+import { IServerActionStatus } from "../../interfaces/IServerActionStatus";
+import { serverStartAction } from "../../actions/serverStartAction";
+import { serverStopAction } from "../../actions/serverStopAction";
 
 
 

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
 import { Journal } from './Journal'
+import { Loading } from 'aws-amplify-react';
 
 
 const signUpConfig= {
@@ -73,12 +74,15 @@ export const JournalPageWithAuth: React.FC = () => {
     //     setAuthToken,
     // }
     
+    React.useEffect(() => {
+        document.title = "Journal"
+    }, [])
     
     return  (
         <main role="main">
             
             <Authenticator  theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
-                          ConfirmSignUp, ]}>
+                          ConfirmSignUp, Loading ]}>
                 <Journal/>
             </Authenticator>
             

@@ -8,7 +8,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Switch, Route } from 'react-router';
 import createInitialStore, {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
-import GameOfLifeWithNav from './components/GameOfLifePage/GameOfLifeWithNav';
+import GameOfLifeLazyWrapper from './components/GameOfLifePage/GameOfLifeWithNav';
 import { JournalPageWithAuth } from './components/JournalPage/JournalPageWithAuth';
 import { NavBar } from './components/NavBar/NavBar';
 import Amplify from 'aws-amplify';
@@ -27,7 +27,7 @@ ReactDOM.render(
                 <Switch>
                     <Route exact path='/' component={WelcomePage} />
                     <Route exact path='/server' component={ServerControlsWithAuth} />
-                    <Route exact path='/game-of-life' component={GameOfLifeWithNav} />
+                    <Route exact path='/game-of-life' component={GameOfLifeLazyWrapper} />
                     <Route path='/journal' component={JournalPageWithAuth} />
                 </Switch>
             </div>

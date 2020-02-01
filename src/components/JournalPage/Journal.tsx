@@ -8,6 +8,7 @@ import { useAuthData } from '../Auth/common';
 import IApplicationStore from '../../interfaces/IApplicationStore';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
+import { LoadingSpinner } from '../GameOfLifePage/GameOfLifeWithNav';
 
 
 
@@ -39,9 +40,9 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
     },[authToken])
 
     React.useEffect(()=> {
-    if(submitNewEntrySuccess === true) {
-        dispatch(fetchEntriesAction())
-    }
+        if(submitNewEntrySuccess === true) {
+            dispatch(fetchEntriesAction())
+        }
     },[submitNewEntrySuccess])
 
     const toggleNew = () => {
@@ -52,7 +53,10 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
         return(
         <ConfirmEmail/>
         )
-      }
+    }
+    if(props.authState === "loading") {
+        return <LoadingSpinner variant='light' />;
+    }
     if(props.authState !== "signedIn" || !props.authData) {
         return null
     }

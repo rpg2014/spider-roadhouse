@@ -2,6 +2,9 @@ import React from 'react';
 import './WelcomePage.css'
 
 export function WelcomePage(): JSX.Element {
+    React.useEffect(() => {
+    document.title = "Parker's Site"
+    }, [])
     return(<>
         
         <div className="row  flex-grow-1 m-auto flex-fill">

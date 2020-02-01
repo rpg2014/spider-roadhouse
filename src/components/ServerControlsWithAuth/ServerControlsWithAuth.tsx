@@ -2,6 +2,7 @@ import React from 'react';
 import './ServerControlsWithAuth.css';
 import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
 import  ServerControls  from '../ServerControls/ServerControls';
+import { Loading } from 'aws-amplify-react';
 
 
 
@@ -51,12 +52,15 @@ const theme = {
 
 
 const ServerControlsWithAuth: React.FC = () => {
+    React.useEffect(() => {
+        document.title = "Server Controls"
+    }, [])
   return (
       
               
               <main role="main" className="inner row cover mb-auto mt-2">       
                       <Authenticator className='col max_width ' theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
-                          ConfirmSignUp, ]}>
+                          ConfirmSignUp, Loading]}>
                           <ServerControls />
                       </Authenticator>
               </main>

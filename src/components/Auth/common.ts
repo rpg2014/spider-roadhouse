@@ -30,7 +30,6 @@ export const useAuthData = (authData?: CognitoUser) => {
   const isRefreshIdSet: boolean = useSelector((state: IApplicationStore) => state.authDetails.refreshTimeoutId ? true : false);
 
   useEffect(() => {
-    let id: NodeJS.Timeout;
     // if there is not a saved authToken but there is auth data
     if (!authToken && authData) {
       dispatch(registerAuthData(authData));

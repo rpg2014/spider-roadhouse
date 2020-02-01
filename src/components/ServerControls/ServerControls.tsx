@@ -6,10 +6,11 @@ import './ServerControls.css'
 import IApplicationStore from "../../interfaces/IApplicationStore";
 import { CognitoUser } from "amazon-cognito-identity-js";
 import ServerText from "../Server/ServerText";
-import StartStopButton from "../StartStopButton";
+import StartStopButton from "../Server/StartStopButton";
 import { ConfirmEmail } from '../Auth/ConfirmEmail'
 import { useAuthData } from '../Auth/common';
 import { LoadingSpinner } from "../GameOfLifePage/GameOfLifeWithNav";
+import { ErrorAlert } from "../JournalPage/Error";
 
 
 export interface IMainProps {
@@ -23,6 +24,10 @@ export const ServerControls = (props: IMainProps): JSX.Element => {
   useAuthData(props.authData)
   if (props.authState === "confirmSignUp") {
     return <ConfirmEmail />
+  }
+
+  if (props.authState === "loading") {
+    return <LoadingSpinner variant="light" />
   }
 
   if (props.authState === "signedIn" && props.authData) {
@@ -41,7 +46,10 @@ export const ServerControls = (props: IMainProps): JSX.Element => {
       </div>
     );
   }
-  return <LoadingSpinner />;
+  return <ErrorAlert errorDetail={{
+    errorMessage: "Something went wrong, try refreshing the page.  If that doesn't work, contact Parker.",
+    httpStatus: 500
+  }}/>;
 }
 
 
