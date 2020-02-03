@@ -14,8 +14,7 @@ export function WelcomePage(): JSX.Element {
               <p className="lead">I am a software developer currently employed at Amazon. I have a wide range of
                 interests, from systems programming with Rust, to frontend development with Typescript and React</p>
               <p className="lead">
-                <a href="https://www.linkedin.com/in/parker-given-47279b12b/" className="btn btn-lg btn-secondary">Learn
-                  more</a>
+                <a href="https://github.com/rpg2014/spider-roadhouse" className="btn btn-lg btn-dark">This sites's repository</a>
               </p>
             </main>
           </div>
@@ -23,7 +22,7 @@ export function WelcomePage(): JSX.Element {
         <div className='row'>
           <footer className=" col mastfoot mt-auto">
             <div className="inner">
-              <p>Made by <a href="https://github.com/rpg2014/spider-roadhouse">Parker</a>.</p>
+              <p>Made by <a href="https://www.linkedin.com/in/parker-given-47279b12b/">Parker</a>.</p>
             </div>
           </footer>
         </div>

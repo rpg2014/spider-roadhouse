@@ -1,7 +1,4 @@
-For auth.  Do login to java server, and have it check against a dynamo db table to see if user + hashed login are authorized. 
- if authorized then generate session token and send it back.  this session token is the csrf token for start and stop actions
-have java handled the auth and commands straight from the frontend,
-    User table in dynamodb with isAllowed field.
+This website is used to control my minecraft server orchestration backend, with enterprise level authentication and granular authorization.  There is also a journal feature.  The entries are encrypted using the AWS entryption client and stored in DynamoDb.  It also has a rust web assembly implementation of Conway's Game of Life.  
 
 # See changes_overview.md for more details about the work to do
 
