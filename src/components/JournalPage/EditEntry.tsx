@@ -8,6 +8,7 @@ import { useFetch } from "react-async";
 import { SPIDERMAN_BASE_URL, JOURNAL } from "../../store/paths";
 import { deleteEntryAction, fetchEntriesAction } from "../../actions/journalActions";
 import { Alert, Spinner } from "react-bootstrap";
+import { getHeaders } from '../Auth/common';
 
 
 interface IEditResponse {
@@ -26,11 +27,7 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
     const [dateTime, setDateTime] = useState(initalState.date)
     const [isMarkdown, setMarkdown] = useState(initalState.isMarkdown)
 
-    const headers = [
-        ['spider-access-token', authToken] ,
-        ['Content-Type', 'application/json'],
-        ['Accept' , 'application/json']
-    ]
+    const headers = getHeaders(authToken);
     let formData: Partial<JournalEntryProps> = {
         title,
         text,
@@ -61,7 +58,7 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
         run()
     }
     // deletes the entry from the local state
-    if(isFulfilled && data && data.success) {
+    if(isFulfilled && data) {
         dispatch(deleteEntryAction({
             id: initalState.id
         }));

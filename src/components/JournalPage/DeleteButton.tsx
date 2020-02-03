@@ -70,7 +70,7 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
     }
 
     const getText = () => {
-        return (isPending ? <Spinner variant='light' animation='border' size='sm' as='span' role='status'/> : "Delete")
+        return (isPending ? <Spinner variant='danger' animation='border' size='sm' as='span' role='status'/> : "Delete")
     }
 
     return (

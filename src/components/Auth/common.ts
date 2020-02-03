@@ -23,6 +23,14 @@ export const extractAuthToken = (authData: CognitoUser, authState: string) => {
       }
 }
 
+export const getHeaders = (authToken: string) => {
+  return [
+    ['spider-access-token', authToken] ,
+    ['Content-Type', 'application/json'],
+    ['Accept' , 'application/json']
+]
+}
+
 
 export const useAuthData = (authData?: CognitoUser) => {
   const dispatch = useDispatch();

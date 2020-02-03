@@ -9,8 +9,7 @@ import ServerText from "../Server/ServerText";
 import StartStopButton from "../Server/StartStopButton";
 import { ConfirmEmail } from '../Auth/ConfirmEmail'
 import { useAuthData } from '../Auth/common';
-import { LoadingSpinner } from "../GameOfLifePage/GameOfLifeWithNav";
-import { ErrorAlert } from "../JournalPage/Error";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 
 export interface IMainProps {
@@ -26,9 +25,15 @@ export const ServerControls = (props: IMainProps): JSX.Element => {
     return <ConfirmEmail />
   }
 
-  if (props.authState === "loading") {
-    return <LoadingSpinner variant="light" />
-  }
+  if(props.authState === "loading") {
+    return (
+        <div className='m-auto text-center'>
+
+            <div className='display-1 text-muted'>Logging in...</div>
+            <LoadingSpinner variant='dark' />
+        </div>
+    )
+}
 
   if (props.authState === "signedIn" && props.authData) {
     return (
@@ -46,10 +51,11 @@ export const ServerControls = (props: IMainProps): JSX.Element => {
       </div>
     );
   }
-  return <ErrorAlert errorDetail={{
-    errorMessage: "Something went wrong, try refreshing the page.  If that doesn't work, contact Parker.",
-    httpStatus: 500
-  }}/>;
+  return <>{undefined}</>;
+  // return <ErrorAlert errorDetail={{
+  //   errorMessage: "Something went wrong, try refreshing the page.  If that doesn't work, contact Parker.",
+  //   httpStatus: 500
+  // }}/>;
 }
 
 

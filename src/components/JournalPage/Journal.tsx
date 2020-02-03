@@ -2,13 +2,13 @@ import * as React from 'react';
 import {JournalList} from './JournalList'
 import { SignOut } from 'aws-amplify-react';
 import { ConfirmEmail } from '../Auth/ConfirmEmail';
-import { CognitoUser, CognitoUserSession } from "amazon-cognito-identity-js";
+import { CognitoUser } from "amazon-cognito-identity-js";
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthData } from '../Auth/common';
 import IApplicationStore from '../../interfaces/IApplicationStore';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
-import { LoadingSpinner } from '../GameOfLifePage/GameOfLifeWithNav';
+import { LoadingSpinner } from '../LoadingSpinner';
 
 
 
@@ -55,7 +55,13 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
         )
     }
     if(props.authState === "loading") {
-        return <LoadingSpinner variant='light' />;
+        return (
+            <div className='m-auto text-center'>
+
+                <div className='display-1 text-muted'>Logging in...</div>
+                <LoadingSpinner variant='dark' />
+            </div>
+        )
     }
     if(props.authState !== "signedIn" || !props.authData) {
         return null
@@ -68,7 +74,7 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
                         Here are all of your journal entries sorted by date    
                         <br/>
                         <span className='smallest-font'>
-                            The notes are encrypted before they are saved on the server.
+                            The notes are encrypted before they are saved on the server.  No one has access to them but you
                         </span>
                     </p>
                 </div>
@@ -79,8 +85,8 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
                 </div>
             </div>
             
-               {isNewEntryDialogOpen? <NewEntry /> : <JournalList />}
-            
+               {isNewEntryDialogOpen? <NewEntry /> : undefined}
+               <JournalList />
             <div className='row center mx-auto mt-2'>
                 <SignOut/>
             </div>

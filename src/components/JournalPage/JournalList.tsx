@@ -1,11 +1,11 @@
 import * as React from "react";
 import './Journal.css'
-import { LoadingSpinner } from "../GameOfLifePage/GameOfLifeWithNav";
 import { useSelector, useDispatch } from "react-redux";
 import IApplicationStore from "../../interfaces/IApplicationStore";
 import { ErrorAlert } from './Error'
 import { toggleNewDialog } from "../../actions/journalActions";
 import { JournalEntry } from "./JournalEntry";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 
 
@@ -22,7 +22,10 @@ export const JournalList = () => {
 
     if(entriesState.isFetching && !entriesState.data){
         return (
-            <LoadingSpinner />
+            <>
+                <div className='text-dark display-4'>Fetching entries...</div>
+                <LoadingSpinner variant='dark' />
+            </>
         )
     }
     if(entriesState.isError && entriesState.errorData){
