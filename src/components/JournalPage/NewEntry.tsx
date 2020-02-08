@@ -1,4 +1,4 @@
-import  React, { useState, ChangeEvent, useEffect } from "react"
+import  React, { useState, ChangeEvent } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNewDialog, fetchEntriesAction } from "../../actions/journalActions";
 import IApplicationStore from "../../interfaces/IApplicationStore";
@@ -73,7 +73,7 @@ export const NewEntry: React.FC = () => {
 
 
     // create entry in local state,  Not gonna happen now tho
-    console.log(JSON.stringify(data))
+    
     // for now hop tback to journal
     if(isFulfilled && data) {
         console.log("done")

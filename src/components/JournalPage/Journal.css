@@ -14,3 +14,25 @@
 .smallest-font {
     font-size: small;
 }
+
+.newEntry-enter {
+    opacity: 0;
+    height: 0%;
+  }
+  
+  .newEntry-enter.newEntry-enter-active {
+    height: 400px;
+    opacity: 1;
+    transition: 300ms ease-in-out;
+  }
+  
+  .newEntry-leave {
+    opacity: 1;
+    height: 400px;
+  }
+  
+  .newEntry-leave.newEntry-leave-active {
+    opacity: 0;
+    height: 0%;
+    transition: 400ms ease-out;
+  }

@@ -9,6 +9,7 @@ import IApplicationStore from '../../interfaces/IApplicationStore';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
 import { LoadingSpinner } from '../LoadingSpinner';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 
@@ -84,8 +85,12 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
                     </button>
                 </div>
             </div>
-            
+               <ReactCSSTransitionGroup
+                 transitionName="newEntry"
+                 transitionEnter={true}
+                 transitionLeave={true}>
                {isNewEntryDialogOpen? <NewEntry /> : undefined}
+               </ReactCSSTransitionGroup>
                <JournalList />
             <div className='row center mx-auto mt-2'>
                 <SignOut/>
