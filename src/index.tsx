@@ -5,7 +5,7 @@ import ServerControlsWithAuth from './components/ServerControlsWithAuth/ServerCo
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router';
+import { Route } from 'react-router';
 import createInitialStore, {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import GameOfLifeLazyWrapper from './components/GameOfLifePage/GameOfLifeWithNav';
@@ -14,22 +14,41 @@ import { NavBar } from './components/NavBar/NavBar';
 import Amplify from 'aws-amplify';
 
 import 'bootstrap' // import bootstrap js
+import { CSSTransition } from 'react-transition-group';
 
 
 
 export const store = createInitialStore();
+
+export const routes = [
+    { path: '/', name: 'Home', Component: WelcomePage, exact: true},
+    { path: '/server', name: 'Server', Component: ServerControlsWithAuth, exact: true},
+    { path: '/journal', name: 'Journal', Component: JournalPageWithAuth, exact: false},
+    { path: '/game-of-life', name: 'Life', Component: GameOfLifeLazyWrapper, exact: true},
+  ]
 
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <div className=' h-100 p-3 mx-auto flex-column d-flex container-fluid text-center overflow-rules'>
                 <NavBar />
-                <Switch>
-                    <Route exact path='/' component={WelcomePage} />
-                    <Route exact path='/server' component={ServerControlsWithAuth} />
-                    <Route exact path='/game-of-life' component={GameOfLifeLazyWrapper} />
-                    <Route path='/journal' component={JournalPageWithAuth} />
-                </Switch>
+                {routes.map(route => (
+                    <Route key={route.path} exact={route.exact} path={route.path}>
+                    {route.name === 'Life' ? <route.Component /> : ({ match }) => (
+                      <CSSTransition
+                        in={match !== null}
+                        timeout={300}
+                        classNames="fade-in"
+                        unmountOnExit
+                        exit={false}
+                      >
+                        
+                          <route.Component />
+                        
+                      </CSSTransition>
+                    )}
+                  </Route>
+                ))}
             </div>
         </ConnectedRouter>
     </Provider>

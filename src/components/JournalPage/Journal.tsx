@@ -9,7 +9,8 @@ import IApplicationStore from '../../interfaces/IApplicationStore';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
 import { LoadingSpinner } from '../LoadingSpinner';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransition } from 'react-transition-group';
+
 
 
 
@@ -25,12 +26,6 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
     const authToken = useSelector( (state:IApplicationStore) => state.authDetails.accessToken ? state.authDetails.accessToken.getJwtToken(): undefined);
     const submitNewEntrySuccess = useSelector((state : IApplicationStore) => state.createEntryState.data);
     
-    const fetchEntriesErrorState = useSelector((state: IApplicationStore) => {
-        return {
-            errorData: state.journalEntries.errorData,
-            isError: state.journalEntries.isError
-        }
-    });
     useAuthData(props.authData)
 
     // Fetch journal entries on load. (after we get an authToken or whenever it changes)
@@ -85,12 +80,15 @@ export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
                     </button>
                 </div>
             </div>
-               <ReactCSSTransitionGroup
-                 transitionName="newEntry"
+               <CSSTransition
+               in={isNewEntryDialogOpen}
+                 classNames="newEntry"
+                 unmountOnExit
+                 timeout={300}
                  transitionEnter={true}
                  transitionLeave={true}>
-               {isNewEntryDialogOpen? <NewEntry /> : undefined}
-               </ReactCSSTransitionGroup>
+                    <NewEntry />
+               </CSSTransition>
                <JournalList />
             <div className='row center mx-auto mt-2'>
                 <SignOut/>

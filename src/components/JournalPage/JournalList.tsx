@@ -6,6 +6,7 @@ import { ErrorAlert } from './Error'
 import { toggleNewDialog } from "../../actions/journalActions";
 import { JournalEntry } from "./JournalEntry";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 
 
@@ -22,10 +23,13 @@ export const JournalList = () => {
 
     if(entriesState.isFetching && !entriesState.data){
         return (
-            <>
+            <CSSTransition in timeout={700} classNames='fade-in' appear
+            unmountOnExit>
+                <div>
                 <div className='text-dark display-4'>Fetching entries...</div>
                 <LoadingSpinner variant='dark' />
-            </>
+                </div>
+            </CSSTransition>
         )
     }
     if(entriesState.isError && entriesState.errorData){
