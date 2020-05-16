@@ -61,7 +61,7 @@ export default class GameOfLife extends React.Component < IGameOfLifeProps, IGam
     render() {
         return (
             
-                <main role="main" className="inner  col cover mt-3 mb-auto container ">
+                <main role="main" className="inner cover-container col cover mt-3 mb-auto container ">
                     <div className='row p-1 rounded transparency'>
                         <p className='lead text-center text-dark m-0 non-transparent'>
                             This is a web assembly implementation of Conway's Game of Life.

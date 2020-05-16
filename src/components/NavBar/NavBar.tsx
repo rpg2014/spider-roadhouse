@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { ComponentType, Suspense } from 'react';
 import { NavLink } from 'react-router-dom';
 import './NavBar.css'
+import { routes } from '../..';
+import { LoadingSpinner } from '../LoadingSpinner';
+
 
 
 export function NavBar(): JSX.Element {
@@ -11,12 +14,12 @@ export function NavBar(): JSX.Element {
           <div className="inner">
             <h3 className="masthead-brand">Parker</h3>
             <nav className="nav nav-masthead justify-content-center">
-              <NavLink className="nav-link" activeClassName="active" to="/" exact>Home</NavLink>
-              <NavLink to='/server' className='nav-link' activeClassName="active">
-                     Server
-              </NavLink>
-              <NavLink to='/journal' className='nav-link' activeClassName='active'>Journal</NavLink>  
-              <NavLink className='nav-link'  activeClassName='active' to='/game-of-life'>Life</NavLink>
+              {routes.map(route => (
+                  <NavLink className='nav-link' activeClassName='active' to={route.path} exact={route.exact} key={route.name}>
+                    {route.name}
+                  </NavLink>
+                )
+              )}
               <a className="nav-link" href="https://github.com/rpg2014">My Github</a>
             </nav>
           </div>
@@ -24,4 +27,23 @@ export function NavBar(): JSX.Element {
         </div>
       </div>
     )
+}
+
+
+
+export default function getLazyLoadedComponent(name: string, componentFunction: () => JSX.Element){
+  return ( () => {
+      React.useEffect(() => {
+          document.title = name;
+      }, [])
+
+      return (
+          <div className=' d-flex row py-3 mx-auto flex-column'>
+              <Suspense fallback={<LoadingSpinner/>}>
+                  {componentFunction()}
+              </Suspense>
+          </div>
+      )
+    }
+  )
 }

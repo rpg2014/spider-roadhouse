@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ServerControlsWithAuth from './components/ServerControlsWithAuth/ServerControlsWithAuth';
@@ -8,24 +8,29 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router';
 import createInitialStore, {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
-import GameOfLifeLazyWrapper from './components/GameOfLifePage/GameOfLifeWithNav';
 import { JournalPageWithAuth } from './components/JournalPage/JournalPageWithAuth';
-import { NavBar } from './components/NavBar/NavBar';
+import getLazyLoadedComponent, { NavBar } from './components/NavBar/NavBar';
 import Amplify from 'aws-amplify';
 
 import 'bootstrap' // import bootstrap js
 import { CSSTransition } from 'react-transition-group';
+import GameOfLife from './components/GameOfLifePage/GameOfLife';
+import Boids from './components/Boids/Boids';
+
 
 
 
 export const store = createInitialStore();
 
+const LazyLoadedGameOfLife: React.LazyExoticComponent<typeof GameOfLife> = lazy(() => import('./components/GameOfLifePage/GameOfLife'));
+const LazyLoadedBoids: React.LazyExoticComponent<typeof Boids> = lazy(() => import('./components/Boids/Boids'));
+
 export const routes = [
     { path: '/', name: 'Home', Component: WelcomePage, exact: true},
     { path: '/server', name: 'Server', Component: ServerControlsWithAuth, exact: true},
     { path: '/journal', name: 'Journal', Component: JournalPageWithAuth, exact: false},
-    { path: '/game-of-life', name: 'Life', Component: GameOfLifeLazyWrapper, exact: true},
-  ]
+    { path: '/game-of-life', name: 'Life', Component: getLazyLoadedComponent('Life', () => <LazyLoadedGameOfLife />), exact: true},
+    { path: '/boids', name: 'Boids', Component: getLazyLoadedComponent('Boids', () => <LazyLoadedBoids />)}  ]
 
 ReactDOM.render(
     <Provider store={store}>

@@ -39,7 +39,9 @@ export const ServerControls = (props: IMainProps): JSX.Element => {
     return (
       <div className=' w_85 m-auto'>
         <div className="container h-40">
+          
           <img src={logo} className="App-logo mx-auto d-block" alt="logo" />
+          
         </div>
         <div className='container-fluid d-block h-25'>
           <ServerText />
