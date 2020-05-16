@@ -98,8 +98,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "postinstall": "patch-package"
+    "test": "node scripts/test.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -165,8 +164,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "devDependencies": {
-    "patch-package": "^6.2.2"
   }
 }
