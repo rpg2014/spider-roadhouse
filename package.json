@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.4.3",
+    "@pixi/filter-drop-shadow": "^3.1.1",
+    "@pixi/filter-simple-lightmap": "^3.1.1",
+    "@pixi/filter-tilt-shift": "^3.1.1",
     "@reactivex/rxjs": "^6.5.5",
     "@svgr/webpack": "4.1.0",
     "@types/history": "^4.7.5",
@@ -164,5 +167,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "glsl-shader-loader": "^0.1.6"
   }
 }
