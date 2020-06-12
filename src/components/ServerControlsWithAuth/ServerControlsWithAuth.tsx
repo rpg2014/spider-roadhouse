@@ -3,6 +3,7 @@ import './ServerControlsWithAuth.css';
 import { Authenticator, Greetings, ConfirmSignUp } from 'aws-amplify-react';
 import  ServerControls  from '../ServerControls/ServerControls';
 import { Loading } from 'aws-amplify-react';
+import { theme, signUpConfig } from '../Auth/common';
 
 
 
@@ -15,40 +16,7 @@ import { Loading } from 'aws-amplify-react';
 // You can get the current config object
 // const currentConfig = Auth.configure();
 
-const signUpConfig= {
-    hiddenDefaults: ["phone_number"],
-}
-const containerCss = {
-    backgroundColor: '#5c5c5c',
-    color: '#f8f9fa'
-}
-const whiteColor = {
-    color: '#f8f9fa',
-}
-const inputBox = {
-    borderColor: '#f8f9fa',
-    backgroundColor: 'transparent',
-    border: '1px solid #f8f9fa',
-    //color: 'f8f9fa'
-}
-const buttonTheme ={
-    borderColor: '#f8f9fa',
-    backgroundColor: 'transparent',
-    border: '1px solid #f8f9fa',
-    color: 'f8f9fa'
-}
 
-
-const theme = {
-    formSection: containerCss,
-    sectionHeader: whiteColor,
-    inputLabel: whiteColor,
-    hint: whiteColor,
-    sectionFooter: whiteColor,
-    input: inputBox,
-    button: buttonTheme,
-    signInButton: buttonTheme,
-}
 
 
 const ServerControlsWithAuth: React.FC = () => {

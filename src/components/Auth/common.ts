@@ -69,3 +69,44 @@ const setRefreshTimeout = (dispatch: Dispatch<any>) => {
   // set Id in store
   dispatch(setRefreshTimoutId(id));
 }
+
+
+
+export interface AuthProps {
+  authState?: string,
+  authData?: CognitoUser,
+}
+export const signUpConfig= {
+  hiddenDefaults: ["phone_number"],
+}
+export const containerCss = {
+  backgroundColor: '#5c5c5c',
+  color: '#f8f9fa'
+}
+export const whiteColor = {
+  color: '#f8f9fa',
+}
+export const inputBox = {
+  borderColor: '#f8f9fa',
+  backgroundColor: 'transparent',
+  border: '1px solid #f8f9fa',
+  //color: 'f8f9fa'
+}
+export const buttonTheme ={
+  borderColor: '#f8f9fa',
+  backgroundColor: 'transparent',
+  border: '1px solid #f8f9fa',
+  color: 'f8f9fa'
+}
+
+
+export const theme = {
+  formSection: containerCss,
+  sectionHeader: whiteColor,
+  inputLabel: whiteColor,
+  hint: whiteColor,
+  sectionFooter: whiteColor,
+  input: inputBox,
+  button: buttonTheme,
+  signInButton: buttonTheme,
+}

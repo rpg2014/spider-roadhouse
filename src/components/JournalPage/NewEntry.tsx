@@ -76,7 +76,7 @@ export const NewEntry: React.FC = () => {
     
     // for now hop tback to journal
     if(isFulfilled && data) {
-        console.log("done")
+        
         dispatch(toggleNewDialog());
         dispatch(fetchEntriesAction())
         return (<>Switching...</>)

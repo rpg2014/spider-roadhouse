@@ -7,3 +7,4 @@ export const STOP = "/server/stop";
 export const JOURNAL = '/journal';
 export const NEW = '/new';
 
+export const DYNAMIC_DNS_URL = "https://gpsmv3h5xc.execute-api.us-east-1.amazonaws.com/DynamicDNS"

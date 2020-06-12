@@ -10,6 +10,7 @@ import createInitialStore, {history} from './store/store';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import { JournalPageWithAuth } from './components/JournalPage/JournalPageWithAuth';
 import getLazyLoadedComponent, { NavBar } from './components/NavBar/NavBar';
+import { IntranetLinksWithAuth } from './components/IntranetLinks/IntranetLinksWithAuth'
 import Amplify from 'aws-amplify';
 
 import 'bootstrap' // import bootstrap js
@@ -26,11 +27,12 @@ const LazyLoadedGameOfLife: React.LazyExoticComponent<typeof GameOfLife> = lazy(
 const LazyLoadedBoids: React.LazyExoticComponent<typeof Boids> = lazy(() => import('./components/Boids/Boids'));
 
 export const routes = [
-    { path: '/', name: 'Home', Component: WelcomePage, exact: true},
-    { path: '/server', name: 'Server', Component: ServerControlsWithAuth, exact: true},
-    { path: '/journal', name: 'Journal', Component: JournalPageWithAuth, exact: false},
-    { path: '/game-of-life', name: 'Life', Component: getLazyLoadedComponent('Life', () => <LazyLoadedGameOfLife />), exact: true},
-    { path: '/boids', name: 'Boids', Component: getLazyLoadedComponent('Boids', () => <LazyLoadedBoids />)}  ]
+    { path: '/', name: 'Home', Component: WelcomePage, exact: true, requiresAuth: false},
+    { path: '/server', name: 'Server', Component: ServerControlsWithAuth, exact: true, requiresAuth: false},
+    { path: '/journal', name: 'Journal', Component: JournalPageWithAuth, exact: false, requiresAuth: false},
+    { path: '/game-of-life', name: 'Life', Component: getLazyLoadedComponent('Life', () => <LazyLoadedGameOfLife />), exact: true, requiresAuth: false},
+    { path: '/boids', name: 'Boids', Component: getLazyLoadedComponent('Boids', () => <LazyLoadedBoids />), requiresAuth: false},
+    { path: '/intranet', name: "Links", Component: IntranetLinksWithAuth, exact: true, requiresAuth: true}  ]
 
 ReactDOM.render(
     <Provider store={store}>
@@ -108,7 +110,7 @@ Amplify.configure({
         // REQUIRED - Cookie domain (only required if cookieStorage is provided)
             domain: 'pwa.parkergiven.com',
         // OPTIONAL - Cookie path
-            path: '/',
+            //path: '/',
         // OPTIONAL - Cookie expiration in days
             expires: 365,
         // OPTIONAL - Cookie secure flag

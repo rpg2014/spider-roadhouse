@@ -4,7 +4,7 @@ import { SignOut } from 'aws-amplify-react';
 import { ConfirmEmail } from '../Auth/ConfirmEmail';
 import { CognitoUser } from "amazon-cognito-identity-js";
 import { useDispatch, useSelector } from 'react-redux';
-import { useAuthData } from '../Auth/common';
+import { useAuthData, AuthProps } from '../Auth/common';
 import IApplicationStore from '../../interfaces/IApplicationStore';
 import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalActions';
 import { NewEntry } from './NewEntry'
@@ -15,11 +15,9 @@ import { CSSTransition } from 'react-transition-group';
 
 
 interface JournalProps {
-    authState?: string,
-    authData?: CognitoUser,
 }
 
-export const Journal: React.FC<JournalProps> = (props: JournalProps) => {
+export const Journal: React.FC<JournalProps&AuthProps> = (props: JournalProps & AuthProps) => {
     const isNewEntryDialogOpen = useSelector((state:IApplicationStore)=> state.isNewJournalDialogOpen);
     const dispatch = useDispatch();
     
