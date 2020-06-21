@@ -60,7 +60,7 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
                 id: props.id
             }))
         }
-    }, [isFulfilled, data]);
+    }, [isFulfilled, data, dispatch, props.id]);
 
     if(error && !hideError) {
         console.log(error)

@@ -16,7 +16,7 @@ export const IntranetLinksWithAuth: React.FC = () => {
     }, [])
     
     return  (
-        <main role="main">
+        <main role="main" className=' h-50 my-auto'>
             
             <Authenticator  theme={theme} signUpConfig={signUpConfig} hide={ [ Greetings,
                           ConfirmSignUp, Loading ]}>

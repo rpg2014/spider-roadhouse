@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RefreshButton from "./RefreshButton";
-import ServerStatusComponent from './Status'
+import {Status} from './Status'
 import ServerDetails from "./ServerDetails";
 import { serverStatusAction } from '../../actions/serverStatusAction';
 import { serverDetailsAction } from '../../actions/serverDetailsActions';
@@ -58,7 +58,7 @@ class ServerText extends React.Component<IServerTextProps> {
                     <div className='parent-container'>
                         <div className="d-flex ">
                             <div className='flex-fill pl-lg-5 text-center '>
-                                <ServerStatusComponent/>
+                                <Status/>
                         
                             </div>
                             

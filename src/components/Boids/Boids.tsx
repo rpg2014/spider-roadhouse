@@ -2,7 +2,6 @@ import React from 'react'
 import { BoidOrchestrator } from 'wasm-boids'
 import * as PIXI from 'pixi.js';
 import boid from '../../triangle.png'
-import displacementPNG from '../../displacement_map.png'
 import water2 from '../../water2.png'
 import gravel from '../../gravel.jpg'
 import { memory} from 'wasm-boids/wasm_boids_bg'
@@ -10,7 +9,6 @@ import { IVec2 } from './BoidInterfaces';
 import { Button, Col, Row, InputGroup } from 'react-bootstrap';
 import {DropShadowFilter} from '@pixi/filter-drop-shadow'
 import {TiltShiftFilter} from '@pixi/filter-tilt-shift'
-import {SimpleLightmapFilter} from '@pixi/filter-simple-lightmap'
 import caustics from '../../caustics.jpg'
 import { CausticFilter } from './CausticFilter';
 // import shaderCode from './boid_shader.glsl';

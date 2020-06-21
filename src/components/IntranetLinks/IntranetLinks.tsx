@@ -5,6 +5,7 @@ import { LoadingSpinner } from '../LoadingSpinner'
 import { useFetch } from 'react-async'
 import { HTTPMethod } from '../../epics/common'
 import { DYNAMIC_DNS_URL } from '../../store/paths'
+import './intranetLinks.css'
 import { Alert, Button } from 'react-bootstrap'
 
 
@@ -79,18 +80,23 @@ export const IntranetLinks: React.FC<AuthProps> =(props: AuthProps & {})=> {
         )
     }
     if(isFulfilled) {
-        return (
-            <div className='m-auto text-center pt-3'>
-                <a href={"http://"+ipAddress+":32400"}>
-                    <Button size='lg' variant='dark' >Plex</Button>
+        return (<div className='row   mx-auto  translucent-bg rounded d-flex flex-column width-control'>
+            
+        <p className='  text-muted px-3 pt-3 h5 lead'>These links only work when you're on my wifi / vpn</p>
+            <div className='    text-center p-2'>
+                <a href={"http://192.168.0.14:32400"}>
+                    <Button className='m-1 text-muted' size='lg' variant='outline-light' >Plex</Button>
                 </a>
-                <a href={"http://"+ipAddress+":8112"} >
-                    <Button className='m-2' size='lg' variant='dark'>Deluge Web App</Button>
+                <a href={"http://192.168.0.14:8112"} >
+                    <Button className='m-1 text-muted' size='lg' variant='outline-light'>Deluge Web App</Button>
                 </a>
-                <a href={"http://"+ipAddress +"/admin"} >
-                    <Button className='m-2' size='lg' variant='dark'>Pi admin</Button>
+                <a href={"http://192.168.0.14/admin"} >
+                    <Button className='m-1 text-muted' size='lg' variant='outline-light'>Pi admin</Button>
                 </a>
             </div>
+        <p className='pb-3  text-muted h4 lead'>VPN IP address: {ipAddress}</p>
+        </div>
+        
         )
     }
    return null;

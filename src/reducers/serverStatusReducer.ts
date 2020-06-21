@@ -4,7 +4,7 @@ import { IAction, SERVER_STATUS_ACTION, SERVER_STATUS_ACTION_SUCCESS, SERVER_STA
 
 
 
-const initalFetchingState: IFetchingState<IServerStatus> = {
+export const initalFetchingStatusState: IFetchingState<IServerStatus> = {
     data: undefined,
     isError: false,
     isFetching: false,
@@ -12,7 +12,7 @@ const initalFetchingState: IFetchingState<IServerStatus> = {
 }
 
 
-export function serverStatusReducer(fetchingState = initalFetchingState, action: IAction<IServerStatus>): IFetchingState<IServerStatus> {
+export function serverStatusReducer(fetchingState = initalFetchingStatusState, action: IAction<IServerStatus>): IFetchingState<IServerStatus> {
     
     switch(action.type){
         case SERVER_STATUS_ACTION:

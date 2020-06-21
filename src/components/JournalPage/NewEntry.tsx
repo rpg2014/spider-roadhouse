@@ -85,7 +85,7 @@ export const NewEntry: React.FC = () => {
             // },1500)
            
         }
-    }, [isFulfilled,data, dispatch, fetchEntriesAction])
+    }, [isFulfilled,data, dispatch])
    
 
     if(isFulfilled && data) {
