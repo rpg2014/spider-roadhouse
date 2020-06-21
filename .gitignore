@@ -21,3 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/tile.jpg
+src/water.jpg
+src/water.png
+src/water2.jpg
+src/shaders/boid_shader.frag
+src/pool.jpg
+src/components/Boids/boid_shader.glsl
+src/displacement_map.png

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { JournalEntryProps } from "./JournalEntry";
 import { useSelector, useDispatch } from "react-redux";
 import IApplicationStore from "../../interfaces/IApplicationStore";
@@ -57,24 +57,23 @@ export const EditEntry = (initalState: JournalEntryProps & editEntryProps) => {
         }
         run()
     }
-    // deletes the entry from the local state
-    if(isFulfilled && data) {
-        dispatch(deleteEntryAction({
-            id: initalState.id
-        }));
-        dispatch(fetchEntriesAction());
 
-        // do after I fix the create entry to work like edit / delete
-        // dispatch(createEntryAction({
-        //     id: initalState.id,
-        //     ...formData
-        // }))
-
-        setTimeout(() => {
-            console.log("Switching away from Edit mode")
-            initalState.toggleEntryMode()
-        }, 250)
-    }
+    useEffect(()=> {
+        if(isFulfilled && data) {
+            // deletes the entry from the local state
+            dispatch(deleteEntryAction({
+                id: initalState.id
+            }));
+            // do after I fix the create entry to work like edit / delete
+            // to create in local state
+            // dispatch(createEntryAction({
+            //     id: initalState.id,
+            //     ...formData
+            // }))
+            dispatch(fetchEntriesAction());
+        }    
+    }, [isFulfilled, data])
+  
     
     
     

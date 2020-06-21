@@ -1,4 +1,4 @@
-import  React, { useState, ChangeEvent } from "react"
+import  React, { useState, ChangeEvent, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNewDialog, fetchEntriesAction } from "../../actions/journalActions";
 import IApplicationStore from "../../interfaces/IApplicationStore";
@@ -75,11 +75,26 @@ export const NewEntry: React.FC = () => {
     // create entry in local state,  Not gonna happen now tho
     
     // for now hop tback to journal
+    useEffect(() => {
+        if(isFulfilled && data) {
+        
+            dispatch(toggleNewDialog());
+            dispatch(fetchEntriesAction())
+            // setTimeout(() => {
+            //     dispatch(toggleNewDialog());
+            // },1500)
+           
+        }
+    }, [isFulfilled,data, dispatch, fetchEntriesAction])
+   
+
     if(isFulfilled && data) {
         
-        dispatch(toggleNewDialog());
-        dispatch(fetchEntriesAction())
-        return (<>Switching...</>)
+        
+        // setTimeout(() => {
+        //     dispatch(toggleNewDialog());
+        // },1500)
+        return (<div/>)//<Alert className=' max_width mx-auto px-3' variant='success'>Done!</Alert>)
     }
 
     return (

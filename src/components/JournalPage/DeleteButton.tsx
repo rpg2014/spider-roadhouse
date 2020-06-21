@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import IApplicationStore from '../../interfaces/IApplicationStore'
 import { IErrorDetail } from '../../interfaces/IErrorDetail';
@@ -54,6 +54,13 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
     const toggleAreYouSure = () => {
         setAreYouSureVisible(isAreYouSureVisible? false: true);
     }
+    useEffect(() => {
+        if(isFulfilled && data && data.success) {
+            dispatch(deleteEntryAction({
+                id: props.id
+            }))
+        }
+    }, [isFulfilled, data]);
 
     if(error && !hideError) {
         console.log(error)
@@ -63,11 +70,7 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
         return <Alert variant="danger" >{error.message}</Alert>
     }
 
-    if(isFulfilled && data && data.success) {
-        dispatch(deleteEntryAction({
-            id: props.id
-        }))
-    }
+    
 
     const getText = () => {
         return (isPending ? <Spinner variant='danger' animation='border' size='sm' as='span' role='status'/> : "Delete")

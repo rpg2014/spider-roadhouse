@@ -10,6 +10,7 @@ import { fetchEntriesAction, toggleNewDialog } from '../../actions/journalAction
 import { NewEntry } from './NewEntry'
 import { LoadingSpinner } from '../LoadingSpinner';
 import { CSSTransition } from 'react-transition-group';
+import { Dispatch } from 'react';
 
 
 
@@ -19,7 +20,7 @@ interface JournalProps {
 
 export const Journal: React.FC<JournalProps&AuthProps> = (props: JournalProps & AuthProps) => {
     const isNewEntryDialogOpen = useSelector((state:IApplicationStore)=> state.isNewJournalDialogOpen);
-    const dispatch = useDispatch();
+    const dispatch: Dispatch<any> = useDispatch();
     
     const authToken = useSelector( (state:IApplicationStore) => state.authDetails.accessToken ? state.authDetails.accessToken.getJwtToken(): undefined);
     const submitNewEntrySuccess = useSelector((state : IApplicationStore) => state.createEntryState.data);
