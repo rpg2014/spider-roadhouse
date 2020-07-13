@@ -1,5 +1,6 @@
 import React from 'react';
 import './WelcomePage.css'
+import { MiniServerStatus } from '../Server/Status';
 
 export function WelcomePage(): JSX.Element {
     React.useEffect(() => {
@@ -18,6 +19,9 @@ export function WelcomePage(): JSX.Element {
               </p>
             </main>
           </div>
+        </div>
+        <div className='row'>
+          <MiniServerStatus/>
         </div>
         <div className='row'>
           <footer className=" col mastfoot mt-auto">

@@ -9,7 +9,7 @@ import { useAuthData, getHeaders } from '../Auth/common';
 import { HTTPMethod } from '../../epics/common';
 import { SPIDERMAN_BASE_URL, JOURNAL, STATUS, DETAILS } from '../../store/paths';
 import { serverStatusReducer, initalFetchingStatusState } from '../../reducers/serverStatusReducer';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { IServerDetails } from '../../interfaces/IServerDetails';
 
 // doesn't work yet
@@ -63,32 +63,40 @@ export const MiniServerStatus: React.FC<any> = () => {
     }
   
 
-    const {data, error ,isPending, isFulfilled,reload} = useFetch<IServerStatus>(SPIDERMAN_BASE_URL + STATUS, options )
-    const serverDetails = useFetch<IServerDetails>(SPIDERMAN_BASE_URL + DETAILS, options )
+    const serverStatus = useFetch<IServerStatus>(SPIDERMAN_BASE_URL + STATUS, options, {json: true} )
+    
+    const serverDetails = useFetch<IServerDetails>(SPIDERMAN_BASE_URL + DETAILS, options, {defer: true} )
     
     
     //doens't work the way its supposted to yet.  need to defer the use fetches until an auth token? maybe?
-    // useEffect(()=> {
-    //     console.log("reload")
-    //     reload();
-    //     serverDetails.reload()
-    // },[authToken])
+    useEffect(()=> {
+        // console.log("fetching mini status")
+        // serverStatus.reload();
+        if(authToken){
+            serverDetails.reload()
+        }
+    },[authToken])
+    
     
     useEffect(()=> {
         let newChild = <></>;
-        if(isFulfilled && error && !authToken) {
+        
+        if(serverStatus.data?.status != ServerStatus.Running) {
+            setVisible(false);
+        }
+        if(serverStatus.isFulfilled && serverStatus.error && !authToken) {
             setVisible(false)
         }else 
-            if(isPending) {
-                newChild = <div>Warming up backend...</div>
+            if(serverStatus.isPending) {
+                newChild = <div>Fetching Status...</div>
             }else
-            if(!isFulfilled && error && error.message !== "401 Unauthorized") {
+            if(!serverStatus.isFulfilled && serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
                 
                 newChild= <div>Unable to reach backend</div>
             }else
             //ignore auth errors for now, we just wanna ping backend
-            if(error && error.message !== "401 Unauthorized") {
-                newChild= <Alert variant='warning'>{error.message}</Alert>
+            if(serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
+                newChild= <Alert variant='warning'>{serverStatus.error.message}</Alert>
                 setTimeout(() => {
                     setVisible(false);
                 },500)
@@ -98,21 +106,33 @@ export const MiniServerStatus: React.FC<any> = () => {
             //TODO: this bottom part isn't working.  It's not displaying the url when is Running.  
             //has to do with the auth token not being present on the first request, and the retrys not working. 
             //right now we pretty much are just gonna ping the backend.  
-            if(data?.status === ServerStatus.Running) {
+            console.log( serverStatus.data)
+            if(serverStatus.data?.status === ServerStatus.Running) {
                 console.log("in outer")
+                let text;
                 if(serverDetails.isFulfilled && serverDetails.data) {
-                    newChild = <Alert variant='info'>Minecraft Server is up at: <button className='alert-link'>{serverDetails.data.dnsName}</button></Alert>
+                    text = <>Minecraft Server is up at: <button className='alert-link'>{serverDetails.data.dnsName}</button></>;
+
+                }else {
+                    text = <>Minecraft Server is up   </>
                 }
+                newChild = <>
+                            <div >{text} <i className="fas fa-power-off text-success text-center mx-1"></i></div>
+                            </>
             }else{
-                newChild = <div >Done!</div>;
+                let text =   "Warming up backend..."
+                newChild = <div >{text}</div>;
                 setTimeout(() => {
-                    setVisible(false);
+                    setChild(<div>{text+ "  Done!"}</div>);
                 },500)
+                // setTimeout(() => {
+                //     setVisible(false);
+                // },1000)
             }
             
             setChild(newChild);
         
-    },[isFulfilled, error, data, serverDetails, authToken])
+    },[serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails, authToken])
 
     
 
@@ -125,7 +145,10 @@ export const MiniServerStatus: React.FC<any> = () => {
             exit
             >
             <div className='w-25 mx-auto center d-flex '>
+                
                 {child}
+                
+                {/* <Button onClick={} */}
             </div>
         </CSSTransition>
     )
