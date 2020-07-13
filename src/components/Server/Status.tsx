@@ -1,16 +1,16 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IServerStatus, ServerStatus } from "../../interfaces/IServerStatus";
 import { IFetchingState } from "../../interfaces/IFetchingState";
 import IApplicationStore from "../../interfaces/IApplicationStore";
 import { useSelector } from "react-redux";
 import { CSSTransition } from 'react-transition-group';
 import { useFetch } from 'react-async';
-import { useAuthData, getHeaders } from '../Auth/common';
+import { getHeaders } from '../Auth/common';
 import { HTTPMethod } from '../../epics/common';
 import { SPIDERMAN_BASE_URL, JOURNAL, STATUS, DETAILS } from '../../store/paths';
-import { serverStatusReducer, initalFetchingStatusState } from '../../reducers/serverStatusReducer';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { IServerDetails } from '../../interfaces/IServerDetails';
+import { Link } from 'react-router-dom';
 
 // doesn't work yet
 export const ServerStatusWithTransistion = () => (
@@ -53,8 +53,9 @@ export function Status() {
 export const MiniServerStatus: React.FC<any> = () => {
     const authToken = useSelector((state: IApplicationStore) => state.authDetails.accessToken? state.authDetails.accessToken.getJwtToken(): "")
     const headers = getHeaders(authToken);
-    const [child, setChild] = useState(<div>Warming up backend...</div>)
+    const [child, setChild] = useState(<div>Connecting to backend...</div>)
     const [visible, setVisible] = useState(true);
+   
     
     const options: RequestInit = {
         headers,
@@ -65,74 +66,71 @@ export const MiniServerStatus: React.FC<any> = () => {
 
     const serverStatus = useFetch<IServerStatus>(SPIDERMAN_BASE_URL + STATUS, options, {json: true} )
     
-    const serverDetails = useFetch<IServerDetails>(SPIDERMAN_BASE_URL + DETAILS, options, {defer: true} )
+    const serverDetails = useFetch<IServerDetails>(SPIDERMAN_BASE_URL + DETAILS, options, {defer: true, json: true} )
     
-    
-    //doens't work the way its supposted to yet.  need to defer the use fetches until an auth token? maybe?
     useEffect(()=> {
-        // console.log("fetching mini status")
-        // serverStatus.reload();
-        if(authToken){
-            serverDetails.reload()
+        if(authToken && serverStatus.data?.status===ServerStatus.Running &&!serverDetails.isFulfilled){
+            serverDetails.run()
         }
-    },[authToken])
+    },[authToken, serverDetails])
     
-    
+
     useEffect(()=> {
         let newChild = <></>;
-        
-        if(serverStatus.data?.status != ServerStatus.Running) {
-            setVisible(false);
-        }
-        if(serverStatus.isFulfilled && serverStatus.error && !authToken) {
-            setVisible(false)
-        }else 
-            if(serverStatus.isPending) {
+        console.log(serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails.data, authToken)
+        if (localStorage.getItem("amplify-authenticator-authState") === "signedIn") {
+            
+            if (serverStatus.isPending) {
                 newChild = <div>Fetching Status...</div>
-            }else
-            if(!serverStatus.isFulfilled && serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
-                
-                newChild= <div>Unable to reach backend</div>
-            }else
-            //ignore auth errors for now, we just wanna ping backend
-            if(serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
-                newChild= <Alert variant='warning'>{serverStatus.error.message}</Alert>
-                setTimeout(() => {
-                    setVisible(false);
-                },500)
-            }else
-            
-
-            //TODO: this bottom part isn't working.  It's not displaying the url when is Running.  
-            //has to do with the auth token not being present on the first request, and the retrys not working. 
-            //right now we pretty much are just gonna ping the backend.  
-            console.log( serverStatus.data)
-            if(serverStatus.data?.status === ServerStatus.Running) {
-                console.log("in outer")
-                let text;
-                if(serverDetails.isFulfilled && serverDetails.data) {
-                    text = <>Minecraft Server is up at: <button className='alert-link'>{serverDetails.data.dnsName}</button></>;
-
-                }else {
-                    text = <>Minecraft Server is up   </>
-                }
-                newChild = <>
-                            <div >{text} <i className="fas fa-power-off text-success text-center mx-1"></i></div>
-                            </>
-            }else{
-                let text =   "Warming up backend..."
-                newChild = <div >{text}</div>;
-                setTimeout(() => {
-                    setChild(<div>{text+ "  Done!"}</div>);
-                },500)
-                // setTimeout(() => {
-                //     setVisible(false);
-                // },1000)
+            } else if (!serverStatus.isFulfilled && serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
+                newChild = <div>Unable to reach backend</div>
+            } else if (serverStatus.error && serverStatus.error.message !== "401 Unauthorized") {
+                //ignore auth errors for now, we just wanna ping backend
+                newChild = <Alert variant='warning'>{serverStatus.error.message}</Alert>
             }
-            
-            setChild(newChild);
+
+            if(serverStatus.isFulfilled){
+                if ( serverStatus.data?.status === ServerStatus.Running ) {
+                
+                    let text;
+                    if (serverDetails.isFulfilled && serverDetails.data) {
+                        text = <>Minecraft Server is up at: <u>{serverDetails.data.domainName}</u></>;
+
+                    } else {
+                        text = <>Minecraft Server is up</>
+                    }
+                    newChild = <>
+                        <div >{text} <i  className="fas fa-power-off text-success link text-center mx-1"></i></div>
+                    </>
+                } else if (serverStatus.data?.status === ServerStatus.Terminated){
+                    newChild = <div></div>
+                }else {
+                    let text = "Connected"
+                    newChild = <div >{text}</div>;
+                    // setTimeout(() => {
+                    //     if(serverStatus.data?.status !== ServerStatus.Running) {
+                    //     setChild(<div>{text+ "  Done!"}</div>);
+                    //     }
+                    // },500)
+                    // setTimeout(() => {
+                    //     if(serverStatus.data?.status !== ServerStatus.Running)
+                    //     setVisible(false);
+                    // },1000)
+                }
+                setChild(newChild);
+                if (serverStatus.data?.status != ServerStatus.Running && visible) {
+                    
+                    setVisible(false);
+                }else if(!visible) {
+                
+                    setVisible(true)
+                }
+                
+                
+            }
+        }
         
-    },[serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails, authToken])
+    },[serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails.data, authToken])
 
     
 

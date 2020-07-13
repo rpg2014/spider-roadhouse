@@ -30,7 +30,7 @@ function handleResponse(ajaxResponse: AjaxResponse): IAction<IServerDetails> {
         case 200: 
             return serverDetailsActionSuccess(
                 {
-                    dnsName: ajaxResponse.response.domainName,
+                    domainName: ajaxResponse.response.domainName,
                 }
             );
         default:

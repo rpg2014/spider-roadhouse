@@ -29,7 +29,7 @@ export function ServerDetails(props: IServerDetailsProps): JSX.Element{
 
     return (
         <div className='display-4 text-light text-center'>
-            {props.serverDetails.data? text + props.serverDetails.data.dnsName : "Press Refresh"}
+            {props.serverDetails.data? text + props.serverDetails.data.domainName : "Press Refresh"}
         </div>
     )
 
