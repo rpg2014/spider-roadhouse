@@ -128,6 +128,13 @@ export const MiniServerStatus: React.FC<any> = () => {
                 
                 
             }
+        }else {
+            if(visible){
+                setChild(<div>Please make an account to see server status</div>)
+                setTimeout(()=> {
+                    setVisible(false)
+                },2000)
+            }
         }
         
     },[serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails.data, authToken])
@@ -138,6 +145,7 @@ export const MiniServerStatus: React.FC<any> = () => {
         <CSSTransition
             in={visible}
             timeout={300}
+            //todo make this look fancier
             classNames="fade-in"
             unmountOnExit
             exit
