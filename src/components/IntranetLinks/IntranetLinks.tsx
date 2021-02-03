@@ -6,7 +6,7 @@ import { useFetch } from 'react-async'
 import { HTTPMethod } from '../../epics/common'
 import { DYNAMIC_DNS_URL } from '../../store/paths'
 import './intranetLinks.css'
-import { Alert, Button } from 'react-bootstrap'
+import { Alert, Button, Spinner } from 'react-bootstrap'
 
 
 interface IDynamicDNSResponse {
@@ -33,7 +33,7 @@ export const IntranetLinks: React.FC<AuthProps> =(props: AuthProps & {})=> {
 
     React.useEffect(() => {
         if(authToken && props.authState === "signedIn") {
-            console.log("fetching")
+            // console.log("fetching")
             run()
         }
     },[authToken])
@@ -60,14 +60,14 @@ export const IntranetLinks: React.FC<AuthProps> =(props: AuthProps & {})=> {
         )
     }
 
-    if(isPending){
-        return (
-            <div className='m-auto text-center'>
-                <div className='display-4 text-muted'>Fetching URLs </div>
-                <LoadingSpinner variant='dark' />
-            </div>
-        )
-    }
+    // if(isPending){
+    //     return (
+    //         <div className='m-auto text-center'>
+    //             <div className='display-4 text-muted'>Fetching URLs </div>
+    //             <LoadingSpinner variant='dark' />
+    //         </div>
+    //     )
+    // }
     if(isFulfilled && error){
         return (
             <div className='m-auto text-center'>
@@ -79,11 +79,11 @@ export const IntranetLinks: React.FC<AuthProps> =(props: AuthProps & {})=> {
             </div>
         )
     }
-    if(isFulfilled) {
+    
         return (<div className='row   mx-auto  translucent-bg rounded d-flex flex-column width-control'>
             
-        <p className='  text-muted px-3 pt-3 h5 lead'>These links only work when you're on my wifi / vpn</p>
-            <div className='    text-center p-2'>
+        <p className='  text-muted px-3 pt-3 h5 lead'>These links only work when you're on my network</p>
+            <div className='  row-md  text-center p-2'>
                 <a href={"http://192.168.0.14:32400"}>
                     <Button className='m-1 text-muted' size='lg' variant='outline-light' >Plex</Button>
                 </a>
@@ -93,11 +93,14 @@ export const IntranetLinks: React.FC<AuthProps> =(props: AuthProps & {})=> {
                 <a href={"http://192.168.0.14/admin"} >
                     <Button className='m-1 text-muted' size='lg' variant='outline-light'>Pi admin</Button>
                 </a>
+                <a href={"http://dash.parkergiven.com"} >
+                    <Button className='m-1 text-muted' size='lg' variant='outline-light'>Dashboard</Button>
+                </a>
             </div>
-        <p className='pb-3  text-muted h4 lead'>VPN IP address: {ipAddress}</p>
+            <p className='pb-3  text-muted h4 lead row justify-content-center'>VPN IP address: <span className='p-0 m-0'>{isPending ||!isFulfilled ? <Spinner className='m-0 p-0'animation='grow' variant='light' size='sm'/>:`\t${ipAddress}`}</span></p>
         </div>
         
         )
-    }
-   return null;
+    
+   
 }

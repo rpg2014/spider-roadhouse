@@ -41,7 +41,9 @@ ReactDOM.render(
                 <NavBar />
                 {routes.map(route => (
                     <Route key={route.path} exact={route.exact} path={route.path}>
-                    {route.name === 'Life' ? <route.Component /> : ({ match }) => (
+                    {route.name === 'Life' /* The canvas in life doesn't like the css transition*/
+                    ? <route.Component /> 
+                    : ({ match }) => (
                       <CSSTransition
                         in={match !== null}
                         timeout={300}
@@ -106,17 +108,17 @@ Amplify.configure({
 
         // OPTIONAL - Configuration for cookie storage
         // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
-        cookieStorage: {
-        // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: 'pwa.parkergiven.com',
-        // OPTIONAL - Cookie path
-            //path: '/',
-        // OPTIONAL - Cookie expiration in days
-            expires: 365,
-        // OPTIONAL - Cookie secure flag
-        // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: true
-        },
+        // cookieStorage: {
+        // // REQUIRED - Cookie domain (only required if cookieStorage is provided)
+        //     domain: 'pwa.parkergiven.com',
+        // // OPTIONAL - Cookie path
+        //     //path: '/',
+        // // OPTIONAL - Cookie expiration in days
+        //     expires: 365,
+        // // OPTIONAL - Cookie secure flag
+        // // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
+        //     secure: true
+        // },
 
         // OPTIONAL - customized storage object
         // storage: new MyStorage(),
