@@ -4,7 +4,7 @@ export const DETAILS = "/server/details";
 export const START = "/server/start";
 export const STOP = "/server/stop";
 
-export const FACTORIO = '/factorio/'
+export const FACTORIO = '/factorio'
 export const F_STATUS =  FACTORIO+STATUS;
 export const F_DETAILS = FACTORIO+DETAILS;
 export const F_START = FACTORIO+START;
