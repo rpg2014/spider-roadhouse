@@ -63,5 +63,5 @@ function requestServerDetails(store: IApplicationStore): Observable<AjaxResponse
     }else if(store.serverType === ServerType.Factorio){
         url= url + FACTORIO+DETAILS
     }
-    return sendRequest(SPIDERMAN_BASE_URL+ DETAILS, HTTPMethod.GET, authToken)
+    return sendRequest(url, HTTPMethod.GET, authToken)
 }
