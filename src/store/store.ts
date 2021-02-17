@@ -1,7 +1,7 @@
 //import { routerMiddleware } from 'react-router-redux';
 //import createBrowserHistory from 'history/createBrowserHistory';
 import { applyMiddleware, createStore } from 'redux';
-import IApplicationStore from '../interfaces/IApplicationStore';
+import IApplicationStore, { ServerType } from '../interfaces/IApplicationStore';
 import createRootReducer from "../reducers"
 import {createBrowserHistory} from 'history';
 import { routerMiddleware } from 'connected-react-router';
@@ -62,6 +62,7 @@ let initalState: IApplicationStore = {
     authDetails: initalAuthDetailsState,
     serverStatus: initalServerStatus,
     serverDetails: initalServerDetailsState,
+    serverType: ServerType.Minecraft,
     serverActionStatus: initalServerActionStatusState,
     journalEntries: initalJournalEntrys,
     createEntryState: initalDeleteEntry,

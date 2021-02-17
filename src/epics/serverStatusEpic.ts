@@ -5,8 +5,8 @@ import { Observable, of } from "rxjs";
 import { mergeMap, catchError, map, withLatestFrom } from "rxjs/operators";
 import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { serverStatusActionSuccess, serverStatusActionFailed } from "../actions/serverStatusAction";
-import { SPIDERMAN_BASE_URL, STATUS } from "../store/paths";
-import IApplicationStore from "../interfaces/IApplicationStore";
+import { FACTORIO, SPIDERMAN_BASE_URL, STATUS } from "../store/paths";
+import IApplicationStore, { ServerType } from "../interfaces/IApplicationStore";
 import { sendRequest, HTTPMethod } from "./common";
 
 
@@ -51,6 +51,12 @@ export function requestServerStatus(store: IApplicationStore): Observable<AjaxRe
     if(store.authDetails.accessToken){
         authToken= store.authDetails.accessToken.getJwtToken();
     }
+    let url = SPIDERMAN_BASE_URL;
+    if(store.serverType === ServerType.Minecraft){
+        url= url + STATUS
+    }else if(store.serverType === ServerType.Factorio){
+        url= url + FACTORIO+STATUS
+    }
 
-    return sendRequest(SPIDERMAN_BASE_URL +STATUS, HTTPMethod.GET, authToken);
+    return sendRequest(url, HTTPMethod.GET, authToken);
 }

@@ -1,10 +1,10 @@
 import { ActionsObservable, StateObservable, ofType } from "redux-observable";
 import { IAction, SERVER_START_ACTION, SERVER_STOP_ACTION } from "../actions/constants";
-import IApplicationStore from "../interfaces/IApplicationStore";
+import IApplicationStore, { ServerType } from "../interfaces/IApplicationStore";
 import { Observable, of } from "rxjs";
 import { withLatestFrom, mergeMap, catchError, map } from "rxjs/operators";
 import { AjaxResponse, AjaxError } from "rxjs/ajax";
-import { SPIDERMAN_BASE_URL, START, STOP } from "../store/paths";
+import { FACTORIO, SPIDERMAN_BASE_URL, START, STOP } from "../store/paths";
 import { sendRequest, HTTPMethod } from "./common";
 import { IServerActionStatus } from "../interfaces/IServerActionStatus";
 import { serverStartActionSuccess, serverStartActionFailed } from "../actions/serverStartAction";
@@ -76,6 +76,11 @@ function sendServerAction(details: [IAction<IServerActionStatus>, IApplicationSt
     }
 
     let url: string = SPIDERMAN_BASE_URL ;
+
+     if(details[1].serverType === ServerType.Factorio){
+        url= url + FACTORIO
+    }
+
     if(details[0].type === SERVER_START_ACTION){
         url += START;
     } else {

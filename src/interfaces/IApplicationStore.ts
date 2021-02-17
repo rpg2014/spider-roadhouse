@@ -13,10 +13,17 @@ export default interface IApplicationStore {
     serverStatus: IFetchingState<IServerStatus>;
     authDetails: IAuthDetails;
     serverDetails: IFetchingState<IServerDetails>;
+    serverType: ServerType,
     serverActionStatus: IFetchingState<IServerActionStatus>;
     journalEntries: IFetchingState<JournalEntryProps[]>;
     createEntryState: IFetchingState<boolean>;
     isNewJournalDialogOpen: boolean;
     // updateEntryState: IFetchingState<boolean>,
     // deleteEntryState: IFetchingState<boolean> 
+}
+
+
+export enum ServerType {
+    Minecraft,
+    Factorio
 }

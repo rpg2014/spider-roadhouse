@@ -1,13 +1,13 @@
 import { ActionsObservable, StateObservable, ofType } from "redux-observable";
 import { IAction, SERVER_DETAILS_ACTION } from "../actions/constants";
 import { Observable, of } from "rxjs";
-import IApplicationStore from "../interfaces/IApplicationStore";
+import IApplicationStore, { ServerType } from "../interfaces/IApplicationStore";
 import { withLatestFrom, mergeMap, catchError, map } from "rxjs/operators";
 import { IServerDetails } from "../interfaces/IServerDetails";
 import { AjaxResponse, AjaxError } from "rxjs/ajax";
 import { serverDetailsActionSuccess, serverDetailsActionFailed } from "../actions/serverDetailsActions";
 import { sendRequest, HTTPMethod } from "./common";
-import { SPIDERMAN_BASE_URL, DETAILS } from "../store/paths";
+import { SPIDERMAN_BASE_URL, DETAILS, FACTORIO } from "../store/paths";
 
 
 
@@ -55,6 +55,13 @@ function requestServerDetails(store: IApplicationStore): Observable<AjaxResponse
     let authToken: string = "";
     if(store.authDetails.accessToken){
         authToken = store.authDetails.accessToken.getJwtToken();
+    }
+
+    let url = SPIDERMAN_BASE_URL;
+    if(store.serverType === ServerType.Minecraft){
+        url= url + DETAILS
+    }else if(store.serverType === ServerType.Factorio){
+        url= url + FACTORIO+DETAILS
     }
     return sendRequest(SPIDERMAN_BASE_URL+ DETAILS, HTTPMethod.GET, authToken)
 }
