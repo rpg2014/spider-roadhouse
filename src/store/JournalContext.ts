@@ -1,6 +1,6 @@
 // import React, { useReducer } from "react"
 
-export const test = ""
+export const test = '';
 
 // export const initalJournalState: IJournalContext = {
 //     entries: {
@@ -12,17 +12,13 @@ export const test = ""
 //     isNewEntryDialogOpen: false,
 // }
 
-
 // export const JournalContext = React.createContext(initalJournalState)
-
-
-
 
 // const UPDATE_FETCH = "UPDATE_FETCH"
 // const SET_AUTH = 'SET_AUTH';
 // export const useJournal = () => {
 //     const [state, dispatch] = React.useReducer(journalReducer, initalJournalState);
-    
+
 //     React.useEffect(() => {
 //         const fetchEntries = async () => {
 //             dispatch({
@@ -46,7 +42,7 @@ export const test = ""
 //             error
 //         })
 //         }
-            
+
 //         }
 //         if(!state.entries.data && !state.entries.isError){
 //             fetchEntries();
@@ -74,7 +70,7 @@ export const test = ""
 //                 ...state,
 //                 isNewEntryDialogOpen: state.isNewEntryDialogOpen ? false : true,
 //             };
-//         case UPDATE_FETCH: 
+//         case UPDATE_FETCH:
 //             return {
 //                 ...state,
 //                 entries: {
@@ -84,7 +80,7 @@ export const test = ""
 //                     errorData: action.error,
 //                 }
 //             }
-//         case SET_AUTH: 
+//         case SET_AUTH:
 //             return {
 //                 ...state,
 //                 authToken: action.authToken

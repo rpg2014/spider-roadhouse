@@ -1,4 +1,3 @@
-
 export interface IServerDetails {
-    domainName: string,
+  domainName: string;
 }

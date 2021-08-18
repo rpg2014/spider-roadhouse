@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import Slider from "./Slider";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Slider from './Slider';
 
 class SlideOut extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class SlideOut extends React.Component {
       curUniqId: props.uniqId,
       prevChild: null,
       prevUniqId: null,
-      animationCallback: null
+      animationCallback: null,
     };
   }
 
@@ -27,7 +27,7 @@ class SlideOut extends React.Component {
         curUniqId: uniqId,
         prevChild: prevProps.children,
         prevUniqId,
-        animationCallback: this.swapChildren
+        animationCallback: this.swapChildren,
       });
     }
   }
@@ -37,33 +37,31 @@ class SlideOut extends React.Component {
       childPosition: Slider.FROM_RIGHT,
       prevChild: null,
       prevUniqId: null,
-      animationCallback: null
+      animationCallback: null,
     });
   };
 
   render() {
     return (
-      <Slider
-        position={this.state.childPosition}
-        animationCallback={this.state.animationCallback}
-      >
+      <Slider position={this.state.childPosition} animationCallback={this.state.animationCallback}>
         {this.state.prevChild || this.state.curChild}
       </Slider>
     );
   }
 }
 
-const animateSwitch = (CustomSwitch, AnimatorComponent) => ({
-  children
-}) => (
-  <Route
-    render={({ location }) => (
-      <AnimatorComponent uniqKey={location.pathname} >
-        <CustomSwitch location={location}>{children}</CustomSwitch>
-      </AnimatorComponent>
-    )}
-  />
-);
+const animateSwitch =
+  (CustomSwitch, AnimatorComponent) =>
+  ({ children }) =>
+    (
+      <Route
+        render={({ location }) => (
+          <AnimatorComponent uniqKey={location.pathname}>
+            <CustomSwitch location={location}>{children}</CustomSwitch>
+          </AnimatorComponent>
+        )}
+      />
+    );
 
 const SwitchWithSlide = animateSwitch(Switch, SlideOut);
 

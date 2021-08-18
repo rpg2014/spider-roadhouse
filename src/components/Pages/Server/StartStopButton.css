@@ -1,0 +1,14 @@
+.startButtonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkboxDiv {
+  display: none;
+  overflow: hidden;
+}
+
+.serverTypeButton {
+  cursor: pointer;
+}

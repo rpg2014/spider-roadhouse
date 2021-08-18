@@ -1,11 +1,11 @@
-import { IErrorDetail } from "../interfaces/IErrorDetail";
+import { IErrorDetail } from '../interfaces/IErrorDetail';
 
-export const PING_ACTION = "PING_ACTION";
-export const PING_ACTION_SUCCESS = "PING_ACTION_SUCCESS";
-export const PING_ACTION_FAILED = "PING_ACTION_FAILED";
+export const PING_ACTION = 'PING_ACTION';
+export const PING_ACTION_SUCCESS = 'PING_ACTION_SUCCESS';
+export const PING_ACTION_FAILED = 'PING_ACTION_FAILED';
 
-export const REGISTER_AUTH_DATA = "REGISTER_AUTH_DATA";
-export const REMOVE_AUTH_DATA = "REMOVE_AUTH_DATA";
+export const REGISTER_AUTH_DATA = 'REGISTER_AUTH_DATA';
+export const REMOVE_AUTH_DATA = 'REMOVE_AUTH_DATA';
 
 export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
 
@@ -28,22 +28,22 @@ export const SERVER_STOP_ACTION = 'STOP_ACTION';
 export const SERVER_STOP_ACTION_SUCCESS = 'STOP_ACTION_SUCCESS';
 export const SERVER_STOP_ACTION_FAILED = 'STOP_ACTION_FAILED';
 
-export const FETCH_JOURNAL_ENTRIES ='FETCH_JOURNAL_ENTRIES';
-export const FETCH_JOURNAL_ENTRIES_DONE ='FETCH_JOURNAL_ENTRIES_DONE';
+export const FETCH_JOURNAL_ENTRIES = 'FETCH_JOURNAL_ENTRIES';
+export const FETCH_JOURNAL_ENTRIES_DONE = 'FETCH_JOURNAL_ENTRIES_DONE';
 
 export const CREATE_JOURNAL_ENTRY = 'CREATE_JOURNAL_ENTRY';
 export const CREATE_JOURNAL_ENTRY_DONE = 'CREATE_JOURNAL_ENTRY_DONE';
 
-export const SET_SERVER_TYPE = 'SET_SERVER_TYPE'
+export const SET_SERVER_TYPE = 'SET_SERVER_TYPE';
 
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 
-export const TOGGLE_NEW_DIALOG = 'TOGGLE'
+export const TOGGLE_NEW_DIALOG = 'TOGGLE';
 
 export interface IAction<Response, Request = {}> {
-    type: string,
-    spider_access_token?: string,
-    errorData?: IErrorDetail,
-    response?: Response,
-    request?: Request
+  type: string;
+  spider_access_token?: string;
+  errorData?: IErrorDetail;
+  response?: Response;
+  request?: Request;
 }

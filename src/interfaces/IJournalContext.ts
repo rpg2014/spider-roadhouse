@@ -1,9 +1,5 @@
-
-
-interface ICreateJournalEntry {
-
-}
+interface ICreateJournalEntry {}
 
 export interface IJournalContext {
-    isNewEntryDialogOpen: boolean;
+  isNewEntryDialogOpen: boolean;
 }

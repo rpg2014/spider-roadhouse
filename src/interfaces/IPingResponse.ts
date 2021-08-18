@@ -1,5 +1,3 @@
-
-
 export interface IPingResponse {
-    text: string;
+  text: string;
 }

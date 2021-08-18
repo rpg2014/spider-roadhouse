@@ -1,8 +1,6 @@
-This website is used to control my minecraft server orchestration backend, with enterprise level authentication and granular authorization.  There is also a journal feature.  The entries are encrypted using the AWS entryption client and stored in DynamoDb.  It also has a rust web assembly implementation of Conway's Game of Life.  
+This website is used to control my minecraft server orchestration backend, with enterprise level authentication and granular authorization. There is also a journal feature. The entries are encrypted using the AWS entryption client and stored in DynamoDb. It also has a rust web assembly implementation of Conway's Game of Life.
 
 # See changes_overview.md for more details about the work to do
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -1,6 +1,6 @@
-import {PING_ACTION, PING_ACTION_SUCCESS, PING_ACTION_FAILED, IAction} from './constants';
-import {IErrorDetail} from '../interfaces/IErrorDetail';
-import {IPingResponse} from '../interfaces/IPingResponse';
+import { PING_ACTION, PING_ACTION_SUCCESS, PING_ACTION_FAILED, IAction } from './constants';
+import { IErrorDetail } from '../interfaces/IErrorDetail';
+import { IPingResponse } from '../interfaces/IPingResponse';
 
 // export interface IPingAction {
 //     type: string,
@@ -9,24 +9,21 @@ import {IPingResponse} from '../interfaces/IPingResponse';
 // }
 
 export function pingAction(): IAction<IPingResponse> {
-    return{
-        type: PING_ACTION,
-    }
+  return {
+    type: PING_ACTION,
+  };
 }
 
-export function pingActionSuccess(response: IPingResponse):  IAction<IPingResponse>{
-    return{
-        type: PING_ACTION_SUCCESS,
-        response,
-    }
+export function pingActionSuccess(response: IPingResponse): IAction<IPingResponse> {
+  return {
+    type: PING_ACTION_SUCCESS,
+    response,
+  };
 }
 
-export function pingActionFailed(errorData: IErrorDetail):  IAction<IPingResponse> {
-    return {
-        type: PING_ACTION_FAILED,
-        errorData,
-    }
+export function pingActionFailed(errorData: IErrorDetail): IAction<IPingResponse> {
+  return {
+    type: PING_ACTION_FAILED,
+    errorData,
+  };
 }
-
-
-

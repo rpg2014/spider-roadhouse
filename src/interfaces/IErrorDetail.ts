@@ -1,4 +1,4 @@
 export interface IErrorDetail {
-    httpStatus: number;
-    errorMessage: string;
+  httpStatus: number;
+  errorMessage: string;
 }
