@@ -29,10 +29,10 @@
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.7",
     "babel-preset-react-app": "^9.1.2",
-    "bootstrap": "^4.6.0",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "classnames": "^2.3.1",
+    "component-wasm-functions": "github:rpg2014/component-wasm-functions",
     "connected-react-router": "^6.9.1",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
@@ -173,6 +173,8 @@
     ]
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.1.4",
+    "bootstrap": "^4.6.0",
     "glsl-shader-loader": "^0.1.6",
     "prettier": "2.3.2",
     "webpack-cli": "^4.7.0"

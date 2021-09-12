@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
@@ -22,6 +22,7 @@ import GameOfLife from './components/Pages/GameOfLifePage/GameOfLife';
 import { IntranetLinksWithAuth } from './components/Pages/IntranetLinks/IntranetLinksWithAuth';
 import { JournalPageWithAuth } from './components/Pages/JournalPage/JournalPageWithAuth';
 import ServerControlsWithAuth from './components/Pages/Server/ServerControlsWithAuth/ServerControlsWithAuth';
+import * as bootstrap from 'bootstrap';
 
 export const store = createInitialStore();
 
