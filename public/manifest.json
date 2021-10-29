@@ -1,6 +1,6 @@
 {
-  "short_name": "Roadhouse",
-  "name": "Spiderman Roadhouse",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,13 +8,18 @@
       "type": "image/x-icon"
     },
     {
-      "src": "bigIcon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#343a40",
-  "background_color": "#343a40"
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }
