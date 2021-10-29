@@ -75,7 +75,8 @@ export const Journal: React.FC<JournalProps & AuthProps> = (props: JournalProps 
           </button>
         </div>
       </div>
-      <CSSTransition
+      {//@ts-ignore/
+}     <CSSTransition
         in={isNewEntryDialogOpen}
         classNames="newEntry"
         unmountOnExit

@@ -24,12 +24,15 @@ export const JournalList = () => {
 
   if (entriesState.isFetching && !entriesState.data) {
     return (
-      <CSSTransition in timeout={700} classNames="fade-in" appear unmountOnExit>
+      <>
+      {//@ts-ignore}  
+      }<CSSTransition in timeout={700} classNames="fade-in" appear unmountOnExit>
         <div>
           <div className="text-dark display-4">Fetching entries...</div>
           <LoadingSpinner variant="dark" />
         </div>
       </CSSTransition>
+      </>
     );
   }
   if (entriesState.isError && entriesState.errorData) {

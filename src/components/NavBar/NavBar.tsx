@@ -34,7 +34,7 @@ export function NavBar(): JSX.Element {
   );
 }
 
-const getNavLink = (route: any) => {
+const getNavLink = (route: any): any => {
   return (
     <NavLink className="nav-link" activeClassName="active" to={route.path} exact={route.exact} key={route.name}>
       {route.name}

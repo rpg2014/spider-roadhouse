@@ -82,7 +82,7 @@ export const DeleteButton = (props: IDeleteButtonProps) => {
       </button>
 
       <Modal show={isAreYouSureVisible} onHide={toggleAreYouSure} centered>
-        <Modal.Header className="bg-dark text-white" closeButton translate>
+        <Modal.Header className="bg-dark text-white" closeButton translate='yes'>
           <Modal.Title className="">Are you sure?</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-dark lead">

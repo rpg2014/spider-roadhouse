@@ -23,7 +23,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, EffectCoverflow]);
 interface IComponentLibrary {}
 
 interface IComponent {
-  type: React.ElementType;
+  type: React.ElementType | any;
   name?: string;
   props: SearchBarProps | ProgressBarProps | PlayPauseButtonProps | SkeletonProps | SpinnerProps;
 }

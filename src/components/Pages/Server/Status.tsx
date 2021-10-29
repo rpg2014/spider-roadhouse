@@ -14,9 +14,12 @@ import { Link } from 'react-router-dom';
 
 // doesn't work yet
 export const ServerStatusWithTransistion = () => (
-  <CSSTransition in timeout={500} classNames="fade-in" exit={false} unmountOnExit>
+    <>
+    {//@ts-ignore}  
+    }<CSSTransition in timeout={500} classNames="fade-in" exit={false} unmountOnExit>
     <Status />
   </CSSTransition>
+  </>
 );
 
 export function Status() {
@@ -129,7 +132,9 @@ export const MiniServerStatus: React.FC<any> = () => {
   }, [serverStatus.isFulfilled, serverStatus.error, serverStatus.data, serverDetails.data, authToken]);
 
   return (
-    <CSSTransition
+    <>
+    {//@ts-ignore}  
+    }<CSSTransition
       in={visible}
       timeout={300}
       //todo make this look fancier
@@ -143,6 +148,7 @@ export const MiniServerStatus: React.FC<any> = () => {
         {/* <Button onClick={} */}
       </div>
     </CSSTransition>
+    </>
   );
 };
 
