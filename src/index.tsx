@@ -16,7 +16,7 @@ import Amplify from 'aws-amplify';
 import 'bootstrap'; // import bootstrap js
 import { CSSTransition } from 'react-transition-group';
 
-import Boids from './components/Pages/Boids/Boids';
+import WebGLProjects from './components/Pages/WebGLProjects/WebGLProjects';
 import { ComponentLibrary } from './components/Pages/ComponentLibrary/ComponentLibrary';
 import GameOfLife from './components/Pages/GameOfLifePage/GameOfLife';
 import { IntranetLinksWithAuth } from './components/Pages/IntranetLinks/IntranetLinksWithAuth';
@@ -29,7 +29,7 @@ export const store = createInitialStore();
 const LazyLoadedGameOfLife: React.LazyExoticComponent<typeof GameOfLife> = lazy(
   () => import('./components/Pages/GameOfLifePage/GameOfLife')
 );
-const LazyLoadedBoids: React.LazyExoticComponent<typeof Boids> = lazy(() => import('./components/Pages/Boids/Boids'));
+const LazyLoadedBoids: React.LazyExoticComponent<typeof WebGLProjects> = lazy(() => import('./components/Pages/WebGLProjects/WebGLProjects'));
 
 export const routes = [
   {
@@ -63,7 +63,7 @@ export const routes = [
   {
     path: '/boids',
     name: 'Boids',
-    Component: getLazyLoadedComponent('Boids', () => <LazyLoadedBoids />),
+    Component: getLazyLoadedComponent('WebGL Projects', () => <LazyLoadedBoids />),
     requiresAuth: false,
   },
   {

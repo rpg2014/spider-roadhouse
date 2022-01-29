@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { lazy } from 'react';
 import { PlayPauseButton, ProgressBar, SearchBar, Skeleton, Spinner } from 'rpg2014-components';
 import { ProgressBarProps } from 'rpg2014-components/build/ProgressBar/ProgressBar.types';
 import { SearchBarProps } from 'rpg2014-components/build/SearchBar/SearchBar.types';
@@ -17,6 +18,8 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 import { PlayPauseButtonProps } from 'rpg2014-components/build/PlayPauseButton/PlayPauseButton.types';
 import { SkeletonProps } from 'rpg2014-components/build/Skeleton/Skeleton.types';
 import { SpinnerProps } from 'rpg2014-components/build/Spinner/Spinner.types';
+import { PredictiveInput } from './PredictiveInput';
+
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, EffectCoverflow]);
 
@@ -86,6 +89,7 @@ export const ComponentLibrary = (props: IComponentLibrary) => {
       <a href="https://github.com/rpg2014/Components" className="text-muted">
         <h6>Github link</h6>
       </a>
+      <LazyLoadedPredictiveInput />
       <Swiper
         className="library-wrapper"
         spaceBetween={50}
@@ -95,8 +99,10 @@ export const ComponentLibrary = (props: IComponentLibrary) => {
         centeredSlides
         grabCursor
       >
+        
         {listOfComponents.map((Component) => (
           <SwiperSlide key={Component.type.toString()} className="component-wrapper  mx-auto shadow">
+            
             <Component.type {...Component.props} />
             <p className=" text-dark p-1 rounded transparency  mt-2">{Component.name}</p>
           </SwiperSlide>
@@ -105,3 +111,6 @@ export const ComponentLibrary = (props: IComponentLibrary) => {
     </div>
   );
 };
+
+export const LazyLoadedPredictiveInput: React.LazyExoticComponent<typeof PredictiveInput> = lazy(() => import('./PredictiveInput'))
+
