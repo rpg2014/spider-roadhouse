@@ -10,13 +10,17 @@ export enum HTTPMethod {
 }
 
 export function sendRequest(url: string, method: HTTPMethod, authToken: string, body?: any): Observable<AjaxResponse> {
+  let headers: any = {
+    'spider-access-token': authToken
+  }
+  if (body){
+    headers['Content-Type'] = 'application/json'
+  }
+
   let request: AjaxRequest = {
     url,
     method,
-    headers: {
-      'spider-access-token': authToken,
-      'Content-Type': 'application/json',
-    },
+    headers,
     body,
   };
   return ajax(request);
