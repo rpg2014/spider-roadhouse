@@ -15,6 +15,8 @@ export function sendRequest(url: string, method: HTTPMethod, authToken: string, 
   }
   if (body){
     headers['Content-Type'] = 'application/json'
+  } else {
+    headers['Content-Type'] = ''
   }
 
   let request: AjaxRequest = {

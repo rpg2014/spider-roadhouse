@@ -43,7 +43,7 @@ export function Status() {
 
 export const MiniServerStatus: React.FC<any> = () => {
   const authToken = useSelector((state: IApplicationStore) =>
-    state.authDetails.accessToken ? state.authDetails.accessToken.getJwtToken() : ''
+    state.authDetails.accessToken ? state.authDetails.accessToken.getJwtToken() : 'non-auth-token'
   );
   const headers = getHeaders(authToken);
   const [child, setChild] = useState(<div>Connecting to backend...</div>);
