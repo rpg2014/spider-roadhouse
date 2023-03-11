@@ -57,6 +57,12 @@ function handleError(error: AjaxError, originalAction: IAction<IServerActionStat
       errorMessage: error.response.errorMessage,
     });
   } else {
+    if(error.status === 502){
+      return serverStopActionFailed({
+        httpStatus: error.status,
+        errorMessage: "This probably means that the save worked, keep an eye on the status for the next 10 mins or so."
+      })
+    }
     return serverStopActionFailed({
       httpStatus: error.status,
       errorMessage: error.response.errorMessage,

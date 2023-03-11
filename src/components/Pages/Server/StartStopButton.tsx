@@ -116,7 +116,7 @@ export class StartStopButton extends React.Component<StartStopButtonProps> {
         case undefined:
           break;
       }
-    setTimeout(this.reset.bind(this), 2500);
+    setTimeout(this.reset.bind(this), 5000);
   };
 
   private reset() {
