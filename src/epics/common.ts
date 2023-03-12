@@ -13,7 +13,7 @@ export function sendRequest(url: string, method: HTTPMethod, authToken: string, 
   let headers: any = {
     'spider-access-token': authToken
   }
-  if (body || method == HTTPMethod.GET){
+  if (body || method === HTTPMethod.POST){
     headers['Content-Type'] = 'application/json'
   } else {
     headers['Content-Type'] = null
