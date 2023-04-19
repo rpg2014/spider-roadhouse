@@ -97,6 +97,16 @@ export const IntranetLinks: React.FC<AuthProps> = (props: AuthProps & {}) => {
             Dashboard
           </Button>
         </a>
+        <a href={'http://fleet.parkergiven.com'}>
+          <Button className="m-1 text-muted" size="lg" variant="outline-light">
+            Fleet Monitor
+          </Button>
+        </a>
+        <a href={'http://notes.parkergiven.com'}>
+          <Button className="m-1 text-muted" size="lg" variant="outline-light">
+            Notes
+          </Button>
+        </a>
       </div>
       <p className="pb-3  text-muted h4 lead row justify-content-center">
         VPN IP address:{' '}
