@@ -81,7 +81,8 @@ export const routes = [
   },
 ];
 
-ReactDOM.render(
+const RootNode = () => {
+  return (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div className=" h-100 p-3 mx-auto flex-column d-flex container-fluid text-center overflow-rules">
@@ -101,10 +102,16 @@ ReactDOM.render(
         ))}
       </div>
     </ConnectedRouter>
-  </Provider>,
+  </Provider>
+)}
 
-  document.getElementById('root')
-);
+const rootElement = document.getElementById('root');
+if(rootElement?.hasChildNodes()) {
+  ReactDOM.hydrate(<RootNode/>, rootElement);
+}else {
+  ReactDOM.render(<RootNode/>, rootElement);  
+}
+
 
 const onSuccess = () => {
   console.log('Service Worker Installed successfully');
