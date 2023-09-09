@@ -84,7 +84,7 @@
     "roadhouse-wasm": "github:rpg2014/roadhouse-wasm",
     "rpg2014-components": "github:rpg2014/Components#DevBuild",
     "rxjs": "^6.6.7",
-    "sass": "^1.38.0",
+    "sass": "^1.66.1",
     "sass-loader": "^10",
     "seamless-immutable": "^7.1.4",
     "semver": "6.0.0",
